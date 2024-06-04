@@ -52,7 +52,8 @@ install.packages("refund") # install the refund package
 
 - **Practical Material**
 
-  - Part 1 – Data representation and smoothing
+  - [Part 1 – Data representation and
+    smoothing](practicals/01-smoothing.md)
   - Part 2 – Registration
   - Part 3 – FPCA
   - Part 4 – Functional regression
