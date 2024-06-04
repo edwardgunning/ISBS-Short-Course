@@ -1,7 +1,8 @@
 Functional Data Analysis in Sports Biomechanics
 ================
 
-<img src="logo/isbs-logo.png" alt="logo" style="position:absolute; top:10px; right:10px; padding:10px;" width="40px" heigth="40px"/>
+<img src="logo/isbs-logo.png" alt="logo" style="position:absolute; top:0; right:0; padding:10px;" width="150px" heigth="150px"/>
+<img src="logo/fda-logo.png" alt="logo" style="position:absolute; top:0; left:0; padding:10px;" width="170px" heigth="170px"/>
 
 # Welcome
 

@@ -10,13 +10,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, echo=FALSE}
 htmltools::img(src = knitr::include_graphics("logo/isbs-logo.png"), 
                alt = 'logo', 
-               style = 'position:absolute; top:10px; right:10px; padding:10px;',
-               width = "40px",
-               heigth = "40px")
+               style = 'position:absolute; top:0; right:0; padding:10px;',
+               width = "150px",
+               heigth = "150px")
 ```
 
-```{r, echo=FALSE, include = FALSE}
-htmltools::img(src = knitr::image_uri("logo/fda-logo.png"), 
+```{r, echo=FALSE}
+htmltools::img(src = knitr::include_graphics("logo/fda-logo.png"), 
                alt = 'logo', 
                style = 'position:absolute; top:0; left:0; padding:10px;',
                width = "170px",
