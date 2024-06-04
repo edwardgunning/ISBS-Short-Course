@@ -46,6 +46,19 @@ install.packages("refund") # install the refund package
 
 ------------------------------------------------------------------------
 
+# 📒 Material
+
+- [**Lecture slides**](slides/template-slides.pptx)
+
+- **Practical Material**
+
+  - Part 1 – Data representation and smoothing
+  - Part 2 – Registration
+  - Part 3 – FPCA
+  - Part 4 – Functional Regression
+
+------------------------------------------------------------------------
+
 # 📧 Contact
 
 Queries about the course material should be sent to
