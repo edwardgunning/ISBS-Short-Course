@@ -46,7 +46,7 @@ install.packages("refund") # install the refund package
 
 ------------------------------------------------------------------------
 
-# Contact
+# 📧 Contact
 
 Queries about the course material should be sent to
 <edward.gunning@pennmedicine.upenn.edu> with the subject line *“ISBS
@@ -54,7 +54,7 @@ pre-conference workshop material”*.
 
 ------------------------------------------------------------------------
 
-# References
+# 📚 References
 
 - J. O. Ramsay, Spencer Graves and Giles Hooker (2021). fda: Functional
   Data Analysis. R package version 5.5.1.
