@@ -7,12 +7,12 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-```{r, echo=FALSE, include = FALSE}
+```{r, echo=FALSE}
 htmltools::img(src = knitr::image_uri("logo/isbs-logo.png"), 
                alt = 'logo', 
-               style = 'position:absolute; top:0; right:0; padding:10px;',
-               width = "150px",
-               heigth = "150px")
+               style = 'position:absolute; top:10px; right:10px; padding:10px;',
+               width = "40px",
+               heigth = "40px")
 ```
 
 ```{r, echo=FALSE, include = FALSE}
