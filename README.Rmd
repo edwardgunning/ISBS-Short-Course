@@ -7,7 +7,7 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-<!-- ![](logo/isbs-logo.png) ![](logo/fda-logo.png) -->
+![](logo/isbs-logo.png){width=250px} ![](logo/fda-logo.png){width=250px}
 
 
 ```{r, echo=FALSE, include = FALSE}
