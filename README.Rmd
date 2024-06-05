@@ -7,10 +7,8 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+<!-- ![](logo/isbs-logo.png) ![](logo/fda-logo.png) -->
 
-```{r}
-knitr
-```
 
 ```{r, echo=FALSE, include = FALSE}
 htmltools::img(src = knitr::image_uri("logo/isbs-logo.png"), 
@@ -61,17 +59,16 @@ install.packages("fda") # install the fda package
 install.packages("refund") # install the refund package
 ```
 
-
 ---
 
 # 📒 Material
 * [**Lecture slides**](slides/template-slides.pptx)
 
-* **Practical Material**
+* **Practical Material**:
   * [Part 1 -- Data representation and smoothing](practicals/01-smoothing.md)
   * [Part 2 -- Registration](practicals/02-registration.md)
-  * Part 3 -- FPCA
-  * Part 4 -- Functional regression
+  * [Part 3 -- Functional Principal Components Analysis (FPCA)](practicals/03-fpca.md)
+  * [Part 4 -- Functional regression](practicals/04-functional-regression.md)
 
 ---
 
