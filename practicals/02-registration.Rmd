@@ -100,7 +100,7 @@ The `landmarkreg()` function takes the following main arguments (see `?landmarkr
 
 * `fdobj`: This functional data object contains the curves to be registered. In our case this will be the object `y_fd`.
 
-* `ximarks`: This matrix contains the landmark timings for each curve. It is in the form of an $N \times NL$ matrix where $NL$ represents the number of landmarks. In our case we have $N=109$ curves and $NL=2$ landmarks (the minimum and maximum), so we set up a $109 \times 2$ matrix with the vectors of landmark timings `t_min` and `t_max` in its columns.
+* `ximarks`: This matrix contains the landmark timings for each curve. It is in the form of an $N \times NL$ matrix where $NL$ represents the number of landmarks. In our case we have $N=109$ curves and $NL=2$ landmarks (the minimum and maximum), so we set up a $109 \times 2$ matrix and put the vectors of landmark timings `t_min` and `t_max` in its columns.
 
 ```{r ximarks}
 ximarks_mat <- matrix(data = NA, nrow = 109, ncol = 2) # set up empty matrix

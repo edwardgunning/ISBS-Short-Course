@@ -3,9 +3,8 @@ Functional Data Analysis in Sports Biomechanics
 
 # Welcome
 
-This is the accompanying web page for the [ISBS
-2024](https://www.isbs2024.com) pre-conference workshop [***“Functional
-Data Analysis in Sports
+This is the web page for the [ISBS 2024](https://www.isbs2024.com)
+pre-conference workshop [***“Functional Data Analysis in Sports
 Biomechanics”***](https://www.isbs2024.com/wp-content/uploads/2024/03/Pre-workshop_FDA.pdf),
 delivered by [Prof. Drew Harrison (University of
 Limerick)](https://www.ul.ie/shprc/professor-drew-harrison) and
@@ -85,6 +84,8 @@ install.packages("refund") # install the refund package
   Luo Xiao, Ciprian Crainiceanu and Philip T. Reiss (2022). refund:
   Regression with Functional Data. R package version 0.1-26.
   <https://CRAN.R-project.org/package=refund>
+
+------------------------------------------------------------------------
 
 # 📖 Further Reading
 

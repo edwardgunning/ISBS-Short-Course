@@ -133,8 +133,8 @@ The `landmarkreg()` function takes the following main arguments (see
   It is in the form of an $N \times NL$ matrix where $NL$ represents the
   number of landmarks. In our case we have $N=109$ curves and $NL=2$
   landmarks (the minimum and maximum), so we set up a $109 \times 2$
-  matrix with the vectors of landmark timings `t_min` and `t_max` in its
-  columns.
+  matrix and put the vectors of landmark timings `t_min` and `t_max` in
+  its columns.
 
 ``` r
 ximarks_mat <- matrix(data = NA, nrow = 109, ncol = 2) # set up empty matrix
