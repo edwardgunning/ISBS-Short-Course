@@ -8,6 +8,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
+```{r}
+knitr
+```
+
 ```{r, echo=FALSE, include = FALSE}
 htmltools::img(src = knitr::image_uri("logo/isbs-logo.png"), 
                alt = 'logo', 
@@ -41,7 +45,7 @@ You should bring your own laptop with the following software installed:
 
 * **The RStudio Integrated Development Environment (IDE)**
   * It can be downloaded from [https://posit.co/](https://posit.co/)
-  * For further assistance see [this video by RStudio education](https://vimeo.com/203516510) (**note:** The RStudio company has changed to Posit PBC, so there may be some minor differences)
+  * For further assistance see [this video by RStudio education](https://vimeo.com/203516510) (**Note**: The RStudio company has changed to Posit PBC, so there may be some minor differences)
 
 
 **Note**: If you are unable to install R and RStudio, you can work with a free, lite web version of RStudio called [*posit cloud*](https://posit.cloud/). Watch [this video from Posit PBC](https://www.youtube.com/watch?v=-fzwm4ZhVQQ) to set up an account and get started.
@@ -96,7 +100,7 @@ install.packages("refund") # install the refund package
 
 # 📖 Further Reading
 
-* Crainiceanu, C. M., Goldsmith, J., Leroux, A., & Cui, E. (2024). Functional Data Analysis with R (1st edition). Chapman and Hall/CRC (book website: [https://functionaldataanalysis.org](https://functionaldataanalysis.org)).
+* Crainiceanu, C. M., Goldsmith, J., Leroux, A., & Cui, E. (2024). Functional Data Analysis with R (1st edition). Chapman and Hall/CRC (book website: [https://functionaldataanalysis.org](https://functionaldataanalysis.org))
 
 * Ramsay, J. O., & Silverman, B. W. (2005). Functional Data Analysis (2nd ed.). Springer-Verlag. https://doi.org/10.1007/b98888
 

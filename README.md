@@ -1,6 +1,8 @@
 Functional Data Analysis in Sports Biomechanics
 ================
 
+<!-- ![](logo/isbs-logo.png) ![](logo/fda-logo.png) -->
+
 # Welcome
 
 This is the web page for the [ISBS 2024](https://www.isbs2024.com)
@@ -24,7 +26,7 @@ You should bring your own laptop with the following software installed:
 - **The RStudio Integrated Development Environment (IDE)**
   - It can be downloaded from <https://posit.co/>
   - For further assistance see [this video by RStudio
-    education](https://vimeo.com/203516510) (**note:** The RStudio
+    education](https://vimeo.com/203516510) (**Note**: The RStudio
     company has changed to Posit PBC, so there may be some minor
     differences)
 
@@ -52,13 +54,15 @@ install.packages("refund") # install the refund package
 
 - [**Lecture slides**](slides/template-slides.pptx)
 
-- **Practical Material**
+- **Practical Material**:
 
   - [Part 1 – Data representation and
     smoothing](practicals/01-smoothing.md)
   - [Part 2 – Registration](practicals/02-registration.md)
-  - Part 3 – FPCA
-  - Part 4 – Functional regression
+  - [Part 3 – Functional Principal Components Analysis
+    (FPCA)](practicals/03-fpca.md)
+  - [Part 4 – Functional
+    regression](practicals/04-functional-regression.md)
 
 ------------------------------------------------------------------------
 
@@ -91,7 +95,7 @@ install.packages("refund") # install the refund package
 
 - Crainiceanu, C. M., Goldsmith, J., Leroux, A., & Cui, E. (2024).
   Functional Data Analysis with R (1st edition). Chapman and Hall/CRC
-  (book website: <https://functionaldataanalysis.org>).
+  (book website: <https://functionaldataanalysis.org>)
 
 - Ramsay, J. O., & Silverman, B. W. (2005). Functional Data Analysis
   (2nd ed.). Springer-Verlag. <https://doi.org/10.1007/b98888>
