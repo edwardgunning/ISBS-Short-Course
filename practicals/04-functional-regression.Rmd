@@ -1,0 +1,16 @@
+---
+title: "Part 4: Functional Regression"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = 'center')
+```
+
+# Load Packages
+
+For this section, we just need the `fda` package.
+
+```{r, warning = FALSE, message = FALSE}
+library(fda) # load the fda package
+```
