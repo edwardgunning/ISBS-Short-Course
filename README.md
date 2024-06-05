@@ -1,9 +1,6 @@
 Functional Data Analysis in Sports Biomechanics
 ================
 
-<img src="logo/isbs-logo.png" alt="logo" style="position:absolute; top:0; right:0; padding:10px;" width="150px" heigth="150px"/>
-<img src="logo/fda-logo.png" alt="logo" style="position:absolute; top:0; left:0; padding:10px;" width="170px" heigth="170px"/>
-
 # Welcome
 
 This is the accompanying web page for the [ISBS
@@ -29,8 +26,14 @@ You should bring your own laptop with the following software installed:
   - It can be downloaded from <https://posit.co/>
   - For further assistance see [this video by RStudio
     education](https://vimeo.com/203516510) (**note:** The RStudio
-    company has changed to posit, so there may be some minor
+    company has changed to Posit PBC, so there may be some minor
     differences)
+
+**Note**: If you are unable to install R and RStudio, you can work with
+a free, lite web version of RStudio called [*posit
+cloud*](https://posit.cloud/). Watch [this video from Posit
+PBC](https://www.youtube.com/watch?v=-fzwm4ZhVQQ) to set up an account
+and get started.
 
 ## R Packages
 
@@ -54,7 +57,7 @@ install.packages("refund") # install the refund package
 
   - [Part 1 – Data representation and
     smoothing](practicals/01-smoothing.md)
-  - Part 2 – Registration
+  - [Part 2 – Registration](practicals/02-registration.md)
   - Part 3 – FPCA
   - Part 4 – Functional regression
 
@@ -62,9 +65,12 @@ install.packages("refund") # install the refund package
 
 # 📧 Contact
 
-Queries about the course material should be sent to
-<edward.gunning@pennmedicine.upenn.edu> with the subject line *“ISBS
-pre-conference workshop material”*.
+- Queries about registration for the course should be sent to the ISBS
+  2024 organisers.
+
+- Queries about the course material should be sent to
+  <edward.gunning@pennmedicine.upenn.edu> with the subject line *“ISBS
+  pre-conference workshop material”*.
 
 ------------------------------------------------------------------------
 
@@ -79,3 +85,16 @@ pre-conference workshop material”*.
   Luo Xiao, Ciprian Crainiceanu and Philip T. Reiss (2022). refund:
   Regression with Functional Data. R package version 0.1-26.
   <https://CRAN.R-project.org/package=refund>
+
+# 📖 Further Reading
+
+- Crainiceanu, C. M., Goldsmith, J., Leroux, A., & Cui, E. (2024).
+  Functional Data Analysis with R (1st edition). Chapman and Hall/CRC
+  (book website: <https://functionaldataanalysis.org>).
+
+- Ramsay, J. O., & Silverman, B. W. (2005). Functional Data Analysis
+  (2nd ed.). Springer-Verlag. <https://doi.org/10.1007/b98888>
+
+- Ramsay, J. O., Hooker, G., & Graves, S. (2009). Functional Data
+  Analysis with R and MATLAB. Springer-Verlag.
+  <https://doi.org/10.1007/978-0-387-98185-7>

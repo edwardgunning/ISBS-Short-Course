@@ -11,3 +11,16 @@ library(fda) # load the fda package
 ```
 
 # Load Data
+
+<details>
+
+**Solution**
+
+- Bullet point
+
+``` r
+# code
+x <- 1
+```
+
+</details>
