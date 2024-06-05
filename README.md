@@ -3,6 +3,8 @@ Functional Data Analysis in Sports Biomechanics
 
 <!-- ![](logo/isbs-logo.png) ![](logo/fda-logo.png) -->
 
+------------------------------------------------------------------------
+
 # Welcome
 
 This is the web page for the [ISBS 2024](https://www.isbs2024.com)
@@ -12,6 +14,8 @@ delivered by [Prof. Drew Harrison (University of
 Limerick)](https://www.ul.ie/shprc/professor-drew-harrison) and
 [Dr. Edward Gunning (University of
 Pennsylvania)](https://edwardgunning.github.io/).
+
+------------------------------------------------------------------------
 
 # 🖥 Computing Pre-requisites
 
