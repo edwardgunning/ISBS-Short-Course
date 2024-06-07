@@ -67,8 +67,10 @@ In the `fda` package, we combine these two component parts to produce a `fd` ("f
 
 Let's first set up a basis of $20$ cubic B-spline basis functions on $[0,100]$.
 
-```{r}
+```{r, fig.asp=0.8, fig.width=4.5}
 bspl_20 <- create.bspline.basis(rangeval = c(0, 100), nbasis = 20, norder = 4)
+plot(bspl_20)
+title("Our B-spline basis")
 ```
 
 Now, let's imagine we have $N=10$ functional observations. We require a $20\times10$ matrix of basis coefficients. In practice we would calculate or know these. However, for the purposes of this demonstration we will just simulate them randomly on our computer.

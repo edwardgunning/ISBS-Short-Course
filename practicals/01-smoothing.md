@@ -98,7 +98,11 @@ $[0,100]$.
 
 ``` r
 bspl_20 <- create.bspline.basis(rangeval = c(0, 100), nbasis = 20, norder = 4)
+plot(bspl_20)
+title("Our B-spline basis")
 ```
+
+<img src="01-smoothing_files/figure-gfm/unnamed-chunk-2-1.png" style="display: block; margin: auto;" />
 
 Now, let’s imagine we have $N=10$ functional observations. We require a
 $20\times10$ matrix of basis coefficients. In practice we would
