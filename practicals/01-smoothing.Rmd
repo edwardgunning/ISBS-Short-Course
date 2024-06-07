@@ -13,12 +13,6 @@ knitr::opts_chunk$set(echo = TRUE, fig.align = 'center')
 
 </center>
 
-<style>
-.colored {
-  background-color: #DDDDDD;
-}
-</style>
-
 # Load Packages
 
 ```{r, warning = FALSE, message = FALSE}
@@ -31,13 +25,13 @@ library(fda) # load the fda package
 
 # The `fd` class
 
-The `fda` package represents functional observations (i.e., *curves*) using a **basis function expansion**. That is, each functional observation $x_i(t), \ i = 1, \dots, N$ is represented as a linear combination (or weighted sum) of known basis functions $\{\phi_k(t)\}_{k=1}^k$ as:
+The `fda` package represents functional observations (i.e., *curves*) using a **basis function expansion**. That is, each functional observation $x_i(t), \ i = 1, \dots, N$ is represented as a linear combination (or weighted sum) of known basis functions $\\{\phi_k(t)\\}_{k=1}^k$ as:
 
 $$x_i (t)=\sum_{k=1}^{K} c_{ik} \phi_k(t).$$
 
 This means that our representation of a functional dataset $x_1(t), \dots, x_N(t)$ should comprise two component parts:
 
-1. The set of known **basis functions** $\{ \phi_K(t) \}_{k=1}^K$. These are *common to all curves*. They are defined in the `fda` package as a `basisfd` class.
+1. The set of known **basis functions** $\\{ \phi_k(t) \\}_{k=1}^K$. These are *common to all curves*. They are defined in the `fda` package as a `basisfd` class.
 
 2. The basis coefficients $c_{ik}$. We need $K$ basis coefficients (i.e., 1 coefficient per basis function) to define each individual functional observation. Therefore, for the full dataset of $N$ observations we have an $K \times N$ matrix of basis coefficients.
 
@@ -100,10 +94,18 @@ title("Our first fd object")
 
 **Note**: For more information on building `fd` objects, see Ramsay, Hooker and Graves (2009, pp. 29-31).
 
+---
+
+---
 
 # Producing smooth functions from noisy observations
 
 In most cases we don't know the basis coefficients, we have to estimate or calculate them from noisy sampled measurements.
+
+
+---
+
+---
 
 # Summarising `fd` objects
 

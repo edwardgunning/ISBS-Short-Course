@@ -7,11 +7,6 @@ Part 1: Data Representation and Smoothing
 ![](../logo/fda-logo.png)
 
 </center>
-<style>
-.colored {
-  background-color: #DDDDDD;
-}
-</style>
 
 # Load Packages
 
@@ -146,10 +141,18 @@ title("Our first fd object")
 **Note**: For more information on building `fd` objects, see Ramsay,
 Hooker and Graves (2009, pp. 29-31).
 
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
 # Producing smooth functions from noisy observations
 
 In most cases we don’t know the basis coefficients, we have to estimate
 or calculate them from noisy sampled measurements.
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
 
 # Summarising `fd` objects
 
