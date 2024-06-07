@@ -1,6 +1,12 @@
 Part 2: Registration
 ================
 
+<center>
+
+![](../logo/isbs-logo.png) ![](../logo/fda-logo.png)
+
+</center>
+
 # Load Packages
 
 For this section, we just need the `fda` package.
