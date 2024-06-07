@@ -23,7 +23,7 @@ library(fda) # load the fda package
 
 ------------------------------------------------------------------------
 
-# Structure of the `fda` package
+# The `fd` class
 
 The `fda` package represents functional observations (i.e., *curves*)
 using a **basis function expansion**. That is, each functional
@@ -96,7 +96,55 @@ plot(fourier_20)
 In the `fda` package, we combine these two component parts to produce a
 `fd` (“functional data”) object. If we know the basis function system
 and the matrix of basis coefficients, the code to set up the `fd` object
-is very simple.
+is very simple. We will walk through a short example.
+
+Let’s first set up a basis of $20$ cubic B-spline basis functions on
+$[0,100]$.
+
+``` r
+bspl_20 <- create.bspline.basis(rangeval = c(0, 100), nbasis = 20, norder = 4)
+```
+
+Now, let’s imagine we have $N=10$ functional observations. We require a
+$20\times10$ matrix of basis coefficients. In practice we would
+calculate or know these. However, for the purposes of this demonstration
+we will just simulate them randomly on our computer.
+
+``` r
+set.seed(1996) # so random draws are the same
+C <- matrix(rnorm(20*10), nrow = 20, ncol = 10) # 20x10 matrix of random values
+```
+
+Now that we have our basis object and our matrix of basis coefficients,
+we can set up our `fd` object using the `fd` function.
+
+``` r
+toy_fd <- fd(coef = C, basisobj = bspl_20)
+```
+
+Now that we have done this, let’s go ahead an inspect our first `fd`
+object.
+
+``` r
+class(toy_fd) # (or can do is.fd(toy_fd))
+```
+
+    ## [1] "fd"
+
+``` r
+plot(toy_fd, xlab = "t", ylab = "x(t)")
+```
+
+    ## [1] "done"
+
+``` r
+title("Our first fd object")
+```
+
+<img src="01-smoothing_files/figure-gfm/unnamed-chunk-5-1.png" style="display: block; margin: auto;" />
+
+**Note**: For more information on building `fd` objects, see Ramsay,
+Hooker and Graves (2009, pp. 29-31).
 
 # Producing smooth functions from noisy observations
 
