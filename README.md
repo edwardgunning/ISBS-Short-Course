@@ -74,6 +74,19 @@ install.packages("refund") # install the refund package
 
 ------------------------------------------------------------------------
 
+# Schedule
+
+|              Time | Topic                    | Format                |  Lead   | Material |
+|------------------:|:-------------------------|-----------------------|:-------:|:---------|
+| $09.30$ - $10.15$ | Welcome and Introduction | Lecture               |   DH    | [](link) |
+| $10.15$ - $10.35$ | Coffee Break             |                       |         |          |
+| $10.35$ - $12.15$ | Foundations of FDA       | Lecture               | DH & EG | [](link) |
+| $12.15$ - $13.35$ | Lunch                    |                       |         |          |
+| $13.35$ - $15.15$ | Hands-on FDA with **R**  | Practical (groups)    |   EG    | [](link) |
+| $15.15$ - $16.00$ | Q&A with Coffee          | Group Discussion/ Q&A | DH & EG |          |
+
+------------------------------------------------------------------------
+
 # 📧 Contact
 
 - Queries about registration for the course should be sent to the ISBS

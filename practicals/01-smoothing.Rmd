@@ -1,6 +1,9 @@
 ---
 title: "Part 1: Data Representation and Smoothing"
-output: github_document
+output: 
+  github_document:
+    number_sections: true
+    toc: true
 ---
 
 ```{r setup, include=FALSE}
@@ -33,8 +36,9 @@ This means that our representation of a functional dataset $x_1(t), \dots, x_N(t
 
 1. The set of known **basis functions** $\\{ \phi_k(t) \\}_{k=1}^K$. These are *common to all curves*. They are defined in the `fda` package as a `basisfd` class.
 
-2. The basis coefficients $c_{ik}$. We need $K$ basis coefficients (i.e., 1 coefficient per basis function) to define each individual functional observation. Therefore, for the full dataset of $N$ observations we have an $K \times N$ matrix of basis coefficients.
+2. The **basis coefficients** $c_{ik}$. We need $K$ basis coefficients (i.e., 1 coefficient per basis function) to define each individual functional observation. Therefore, for the full dataset of $N$ observations we have an $K \times N$ matrix of basis coefficients.
 
+**Examples:**
 <details><summary><b>Construct a cubic B-spline basis with 20 basis functions</b></summary>
 ```{r create-bspline, fig.asp=0.8, fig.width=5}
 bspl_20 <- create.bspline.basis(rangeval = c(0, 100), # range of t values
@@ -51,13 +55,13 @@ plot(bspl_20)
 ```
 </details>
 
-<details><summary><b>Construct a Fourier basis with 20 basis functions</b></summary>
+<details><summary><b>Construct a Fourier basis with 15 basis functions</b></summary>
 ```{r create-fourier, fig.asp=0.8, fig.width=5}
-fourier_20 <- create.fourier.basis(rangeval = c(0, 100), # range of t values
-                                nbasis = 20) # number of basis functions
+fourier_15 <- create.fourier.basis(rangeval = c(0, 100), # range of t values
+                                nbasis = 15) # number of basis functions
 
 # plot our basis
-plot(fourier_20)
+plot(fourier_15)
 ```
 </details>
 
@@ -80,13 +84,13 @@ set.seed(1996) # so random draws are the same
 C <- matrix(rnorm(20*10), nrow = 20, ncol = 10) # 20x10 matrix of random values
 ```
 
-Now that we have our basis object and our matrix of basis coefficients, we can set up our `fd` object using the `fd` function.
+Now that we have our basis object and our matrix of basis coefficients, we can set up our `fd` object using the `fd()` function.
 
 ```{r}
 toy_fd <- fd(coef = C, basisobj = bspl_20)
 ```
 
-Now that we have done this, let's go ahead an inspect our first `fd` object.
+Let's inspect our first `fd` object.
 
 ```{r, fig.asp=0.8, fig.width=6}
 class(toy_fd) # (or can do is.fd(toy_fd))
@@ -100,16 +104,144 @@ title("Our first fd object")
 
 ---
 
-# Producing smooth functions from noisy observations
+# Producing Smooth Functions from Noisy Observations
 
-In most cases we don't know the basis coefficients, we have to estimate or calculate them from noisy sampled measurements.
+In most cases we don't know the basis coefficients. Instead, we have to estimate them from noisy sampled measurements of each curve.
 
+For this practical, we'll assume that we measure each functional observation on a common grid $T$ points $t_1, \dots, t_T$, and these measurements are contaminated with some measurement error (or "noise"):
+$$
+y_{ij} = \underbrace{x_i(t_{j})}_{\text{smooth function}} + \underbrace{\epsilon_{ij}}_{\text{noise}}.
+$$
+**--introduce data--**
 
 ---
 
+When creating our `fd` object, we want to recover the underlying functions $x_1(t), \dots, x_N (t)$ as accurately as possible without capturing the noise.
+
+We can do this using a basis expansion, choosing a system of basis functions $\{\phi_k(t)\}$, and then estimating the basis coefficients according to some criteria.
+
+The most straightforward way to do this is by **Ordinary Least Squares (OLS)**, where for each curve we choose $c_{i1}, \dots, c_{iK}$ to minimise the sum of squared errors (SSE):
+$$
+\text{SSE} = \sum_{j=1}^T \left(y_{ij} - \sum_{k=1}^K c_{ik} \phi(t_{ij})\right)^2.
+$$
+
+To compute the basis coefficients by OLS we can use the `smooth.basis()` function, which takes the following three arguments:
+
+* `argvals`: This is our grid of points $t_1, \dots, t_T$.
+
+* `Y`: This is our $T \times N$ matrix containing the discrete noisy measurements of the $N$ curves at the $T$ sampling points.
+
+* `fdParobj`: For OLS, we just supply the `basisobj` we are using to represent the curves.
+
+```{r, eval = FALSE}
+ols_fdSmooth <- smooth.basis(argvals = t_grid, y = Y_mat, fdParobj = bspl_35)
+```
+
+The `smooth.basis()` function returns an `fdSmooth` object. The most important part of this object is the `fd` element -- this is an `fd` object comprising the basis we have supplied and the coefficients we have estimated, so it represents our dataset of smoothed curves.
+
+```{r, eval = FALSE}
+ols_fd <- ols_fdSmooth$fd # or ols_fdSmooth[["fd]]
+plot(ols_fd[1:3,], xlab = "t", ylab = "x(t)")
+matpoints(x = t_grid, y = Y_mat[, 1:3], pch = 20) # overl
+```
+
+With the OLS, the smoothness of the fitted curve is controlled by the number of basis functions $K$.
+
+```{r}
+# add loop with K
+```
+
+A more flexible approach is to choose a risch basis (i.e., a large value of $K$) and and add a penalty to the SSE criterion that penalises the roughness of the fitted function
+$$
+\text{PENSSE} =  \underbrace{\sum_{j=1}^T \left(y_{ij} - \sum_{k=1}^K c_{ik} \phi(t_{ij})\right)^2}_{\text{SSE}} + \lambda \underbrace{\text{PEN}(x(t))}_{\text{Roughness penalty}}.
+$$
+This approach is called **Penalised Ordinary Least Squares (P-OLS)**. The roughness penalty we will use is on the integrated squared second derivative of $x(t)$:
+$$
+\text{PEN}(x(t)) = \int \left( \frac{\mathrm{d}^2 x(t)}{\mathrm{d}t^2} \right)^2 \mathrm{d}t
+$$
+Applying P-OLS with `smooth.basis()` is very similar to OLS, but we pass a general `fdPar` object (rather than just our `basisfd` object) to `fdParobj` argument, to encode information about the basis, the penalty and the smoothing parameter $\lambda$:
+The we create this object using the `fdPar()` function, and then pass the following arguments:
+
+* `fdobj`: here we just supply our basis.
+
+* `Lfdobj`: Here we specify the penalty -- `int2Lfd(m = m)` specifies a penalty on the integrated squared $m$th derivative of our fitted curve, so we set $m=2$ for the second derivative penalty.
+
+* `lambda` specifies the value of the smoothing parameter $\lambda$.
+
+```{r, eval = FALSE}
+fdParobj_pols <-fdPar(fdobj = bspl_20, Lfdobj = int2Lfd(m = 2), lambda = 1)
+```
+
+We then pass the `fdPar` object that we have created to the `fdParobj` argument in `smooth.basis()` to perform P-OLS smoothing.
+
+```{r, eval = FALSE}
+pls_fdSmooth <- smooth.basis(argvals = t_grid, y = Y_mat, fdParobj = fdParobj_pols)
+```
+
+Let's view the effect on the fit of a single curve when we vary $\lambda$:
+
+```{r, eval = FALSE, fig.asp=0.8, fig.width=6}
+# create grid of values for lambda varying on a log10 scale
+log10_lambda_range <- seq(-10, 10, by = 1)
+lambda_range <- 10^log10_lambda_range
+n_lambda <- length(lambda_range) # how many values we're trialling
+
+plot(x = t_grid, y = Y[, 1], pch = 20) # plot underlying data (first curve)
+for(lam in seq_len(n_lambda)) {
+  # loop through different lambdas
+  fdParobj_lam <- fdPar(fdobj = bspl_20, 
+                        Lfdobj = int2Lfd(m = 2),
+                        lambda = lambda_range[lam]) # create fdPar with chosen lambda
+  # do p-ols with chosen lambda:
+  pls_fdSmooth_lam <- smooth.basis(argvals = t_grid, y = Y_mat, fdParobj = fdParobj_lam)
+  # extract fd object:
+  pls_fd_lam <- pls_fdSmooth_lam$fd
+  # overlay line of current fit
+  lines.fd(pls_fd_lam[1, ], col = lam)
+}
+```
+
+For choosing an optimal value of $\lambda$, we typically minimise some measure of fit to the data that is discounted for the complexity of the model. A common measure is the Generalised Cross Validation (GCV) criterion (Craven and Wahba, 1979). It is returned automatically as part of the `fdSmooth` object returned by `smooth.basis()`. 
+In the following, we loop through a range of values for $\lambda$ to find the one that provides the minimum GCV value:
+
+```{r gcv-search, eval = FALSE, fig.asp=0.8, fig.width=6}
+# create vcector to store the GCV values:
+gcv_vec <- vector(mode = "numeric", length = n_lambda)
+
+for(lam in seq_len(n_lambda)) {
+  # loop through different lambdas
+  fdParobj_lam <- fdPar(fdobj = bspl_20, 
+                        Lfdobj = int2Lfd(m = 2),
+                        lambda = lambda_range[lam]) # create fdPar with chosen lambda
+  # do p-ols with chosen lambda:
+  pls_fdSmooth_lam <- smooth.basis(argvals = t_grid, y = Y_mat, fdParobj = fdParobj_lam)
+  # store resulting GCV:
+  gcv_vec[lam] <- pls_fdSmooth_lam$gcv
+}
+
+plot(log10_lambda_range, 
+     y = gcv_vec, 
+     type = "b", 
+     xlab = expression(log[10](lambda)), 
+     ylab = "GCV")
+best_lambda_index <- which.min(gcv_vec)
+abline(v = log10_lambda_range[best_lambda_index])
+
+
+```
+
+Some more things to try:
+
+* Think about how you would code ordinary cross-validation (leave-one-out and $k$-fold).
+
+* Think about how you would examine regression assumptions using what is returned by `smooth.basis()`.
+
+---
 ---
 
-# Summarising `fd` objects
+# Working with `fd` Objects
+
+Evaluating 
 
 Mean -- show mean of coefficients.
 
@@ -117,9 +249,17 @@ Covariance -- just calculation
 
 Boxplot -- add more.
 
+Derivatives + add code
+
+---
+
+---
 
 
 # References
 
 * Ramsay, J. O., Hooker, G., & Graves, S. (2009). Functional Data Analysis with R and MATLAB. Springer-Verlag. https://doi.org/10.1007/978-0-387-98185-7
+
+* Craven, P., & Wahba, G. (1978). Smoothing noisy data with spline functions. Numerische Mathematik, 31(4), 377–403. https://doi.org/10.1007/BF01404567
+
 
