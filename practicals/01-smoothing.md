@@ -24,14 +24,14 @@ The `fda` package represents functional observations (i.e., *curves*)
 using a **basis function expansion**. That is, each functional
 observation $x_i(t), \ i = 1, \dots, N$ is represented as a linear
 combination (or weighted sum) of known basis functions
-$\{\phi_k(t)\}_{k=1}^k$ as:
+$\\{\phi_k(t)\\}_{k=1}^k$ as:
 
 $$x_i (t)=\sum_{k=1}^{K} c_{ik} \phi_k(t).$$
 
 This means that our representation of a functional dataset
 $x_1(t), \dots, x_N(t)$ should comprise two component parts:
 
-1.  The set of known **basis functions** $\{ \phi_K(t) \}_{k=1}^K$.
+1.  The set of known **basis functions** $\\{ \phi_k(t) \\}_{k=1}^K$.
     These are *common to all curves*. They are defined in the `fda`
     package as a `basisfd` class.
 
