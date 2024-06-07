@@ -111,3 +111,6 @@ install.packages("refund") # install the refund package
 - Ramsay, J. O., Hooker, G., & Graves, S. (2009). Functional Data
   Analysis with R and MATLAB. Springer-Verlag.
   <https://doi.org/10.1007/978-0-387-98185-7>
+
+- [CRAN Task View: Functional Data
+  Analysis](https://cran.r-project.org/web/views/FunctionalData.html)

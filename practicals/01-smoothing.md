@@ -13,17 +13,23 @@ Part 1: Data Representation and Smoothing
 library(fda) # load the fda package
 ```
 
-# Load Data
+# Structure of the `fda` package
 
-<details>
+The `fda` package represents functional observations (i.e., *curves*)
+using a *basis function expansion*. That is, each functional observation
+$x_i(t), \ i = 1, \dots, N$ is represented as a linear combination (or
+weighted sum) of known basis functions $\{\phi_k(t)\}_{k=1}^k$ as:
 
-**Solution**
+$$x_i (t)=\sum_{k=1}^{K}$$
 
-- Bullet point
+# Producing smooth functions from noisy observations
 
-``` r
-# code
-x <- 1
-```
+# Constructing a `fd` object manually
 
-</details>
+# Summarising `fd` objects
+
+# References
+
+- Ramsay, J. O., Hooker, G., & Graves, S. (2009). Functional Data
+  Analysis with R and MATLAB. Springer-Verlag.
+  <https://doi.org/10.1007/978-0-387-98185-7>

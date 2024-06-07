@@ -19,19 +19,20 @@ knitr::opts_chunk$set(echo = TRUE)
 library(fda) # load the fda package
 ```
 
-# Load Data
+# Structure of the `fda` package
 
-```{r}
+The `fda` package represents functional observations (i.e., *curves*) using a *basis function expansion*. That is, each functional observation $x_i(t), \ i = 1, \dots, N$ is represented as a linear combination (or weighted sum) of known basis functions $\{\phi_k(t)\}_{k=1}^k$ as:
 
-```
-
-<details> **Solution**
-
-* Bullet point
+$$x_i (t)=\sum_{k=1}^{K}$$
 
 
-```{r, eval = FALSE}
-# code
-x <- 1
-```
-</details>
+# Producing smooth functions from noisy observations
+
+# Constructing a `fd` object manually
+
+# Summarising `fd` objects
+
+# References
+
+* Ramsay, J. O., Hooker, G., & Graves, S. (2009). Functional Data Analysis with R and MATLAB. Springer-Verlag. https://doi.org/10.1007/978-0-387-98185-7
+
