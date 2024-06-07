@@ -17,9 +17,10 @@ library(fda) # load the fda package
 # Structure of the `fda` package
 
 The `fda` package represents functional observations (i.e., *curves*)
-using a *basis function expansion*. That is, each functional observation
-$x_i(t), \ i = 1, \dots, N$ is represented as a linear combination (or
-weighted sum) of known basis functions $\{\phi_k(t)\}_{k=1}^k$ as:
+using a **basis function expansion**. That is, each functional
+observation $x_i(t), \ i = 1, \dots, N$ is represented as a linear
+combination (or weighted sum) of known basis functions
+$\{\phi_k(t)\}_{k=1}^k$ as:
 
 $$x_i (t)=\sum_{k=1}^{K} c_{ik} \phi_k(t).$$
 
@@ -28,15 +29,53 @@ $x_1(t), \dots, x_N(t)$ should comprise two component parts:
 
 1.  The set of known **basis functions** $\{ \phi_K(t) \}_{k=1}^K$.
     These are *common to all curves*. They are defined in the `fda`
-    package as a `basis.fd()` objects.
+    package as a `basisfd` class.
+
+<summary>
+Construct a cubic B-spline basis on $[0, 100]$ with $20$ basis functions
+</summary>
+<details>
+
+``` r
+bspl_20 <- create.bspline.basis(rangeval = c(0, 100), # range of t values
+                                nbasis = 20, # number of basis functions
+                                norder = 4) # order of the piecewise polynomial (4 = cubic)
+
+# show it is a `basisfd` object
+class(bspl_20)
+```
+
+    ## [1] "basisfd"
+
+``` r
+# or 
+is.basis(bspl_20)
+```
+
+    ## [1] TRUE
+
+``` r
+# plot our basis
+plot(bspl_20)
+```
+
+<img src="01-smoothing_files/figure-gfm/create-bspline-1.png" style="display: block; margin: auto;" />
+</details>
 
 2.  The basis coefficients $c_{ik}$.
 
 # Producing smooth functions from noisy observations
 
-# Constructing a `fd` object manually
+In most cases we don’t know the basis coefficients, we have to estimate
+or calculate them from noisy sampled measurements.
 
 # Summarising `fd` objects
+
+Mean – show mean of coefficients.
+
+Covariance – just calculation
+
+Boxplot – add more.
 
 # References
 
