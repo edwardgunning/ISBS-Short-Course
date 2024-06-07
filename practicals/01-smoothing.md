@@ -7,12 +7,21 @@ Part 1: Data Representation and Smoothing
 ![](../logo/fda-logo.png)
 
 </center>
+<style>
+.colored {
+  background-color: #DDDDDD;
+}
+</style>
 
 # Load Packages
 
 ``` r
 library(fda) # load the fda package
 ```
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
 
 # Structure of the `fda` package
 
@@ -31,10 +40,15 @@ $x_1(t), \dots, x_N(t)$ should comprise two component parts:
     These are *common to all curves*. They are defined in the `fda`
     package as a `basisfd` class.
 
-<summary>
-Construct a cubic B-spline basis on $[0, 100]$ with $20$ basis functions
-</summary>
+2.  The basis coefficients $c_{ik}$. We need $K$ basis coefficients
+    (i.e., 1 coefficient per basis function) to define each individual
+    functional observation. Therefore, for the full dataset of $N$
+    observations we have an $K \times N$ matrix of basis coefficients.
+
 <details>
+<summary>
+<b>Construct a cubic B-spline basis with 20 basis functions</b>
+</summary>
 
 ``` r
 bspl_20 <- create.bspline.basis(rangeval = c(0, 100), # range of t values
@@ -61,8 +75,28 @@ plot(bspl_20)
 
 <img src="01-smoothing_files/figure-gfm/create-bspline-1.png" style="display: block; margin: auto;" />
 </details>
+<details>
+<summary>
+<b>Construct a Fourier basis with 20 basis functions</b>
+</summary>
 
-2.  The basis coefficients $c_{ik}$.
+``` r
+fourier_20 <- create.fourier.basis(rangeval = c(0, 100), # range of t values
+                                nbasis = 20) # number of basis functions
+
+# plot our basis
+plot(fourier_20)
+```
+
+<img src="01-smoothing_files/figure-gfm/create-fourier-1.png" style="display: block; margin: auto;" />
+</details>
+
+------------------------------------------------------------------------
+
+In the `fda` package, we combine these two component parts to produce a
+`fd` (“functional data”) object. If we know the basis function system
+and the matrix of basis coefficients, the code to set up the `fd` object
+is very simple.
 
 # Producing smooth functions from noisy observations
 
