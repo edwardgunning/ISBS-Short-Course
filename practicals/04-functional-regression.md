@@ -3,7 +3,8 @@ Part 4: Functional Regression
 
 <center>
 
-![](../logo/isbs-logo.png) ![](../logo/fda-logo.png)
+![](../logo/isbs-logo.png) ![](../logo/whitespace.png)
+![](../logo/fda-logo.png)
 
 </center>
 
