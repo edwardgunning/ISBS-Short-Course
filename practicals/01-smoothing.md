@@ -219,14 +219,14 @@ number of basis functions $K$.
 
 A more flexible approach is to choose a risch basis (i.e., a large value
 of $K$) and and add a penalty to the SSE criterion that penalises the
-roughness of the fitted function $$
-\text{PENSSE} =  \underbrace{\sum_{j=1}^T \left(y_{ij} - \sum_{k=1}^K c_{ik} \phi(t_{ij})\right)^2}_{\text{SSE}} + \lambda \underbrace{\text{PEN}(x(t))}_{\text{Roughness penalty}}.
-$$ This approach is called **Penalised Ordinary Least Squares (P-OLS)**.
+roughness of the fitted function
+$$\text{PENSSE} =  \underbrace{\sum_{j=1}^T \left(y_{ij} - \sum_{k=1}^K c_{ik} \phi(t_{ij})\right)^2}_{\text{SSE}} + \lambda \underbrace{\text{PEN}(x(t))}_{\text{Roughness penalty}}.$$
+This approach is called **Penalised Ordinary Least Squares (P-OLS)**.
 The roughness penalty we will use is on the integrated squared second
-derivative of $x(t)$: $$
-PEN(x(t)) = \int \left( \frac{\mathrm{d}^2 x(t)}{\mathrm{d}t^2} \right)^2 \mathrm{d}t
-$$ Applying P-OLS with `smooth.basis()` is very similar to OLS, but we
-pass a general `fdPar` object (rather than just our `basisfd` object) to
+derivative of $x(t)$:
+$$PEN(x(t)) = \int \left( \frac{\mathrm{d}^2 x(t)}{\mathrm{d}t^2} \right)^2 \mathrm{d}t$$
+Applying P-OLS with `smooth.basis()` is very similar to OLS, but we pass
+a general `fdPar` object (rather than just our `basisfd` object) to
 `fdParobj` argument, to encode information about the basis, the penalty
 and the smoothing parameter $\lambda$: The we create this object using
 the `fdPar()` function, and then pass the following arguments:
