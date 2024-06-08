@@ -26,7 +26,7 @@ library(fda) # load the fda package
 
 ---
 
-# The `fd` class
+# The `fd` Class
 
 The `fda` package represents functional observations (i.e., *curves*) using a **basis function expansion**. That is, each functional observation $x_i(t), \ i = 1, \dots, N$ is represented as a linear combination (or weighted sum) of known basis functions $\\{\phi_k(t)\\}_{k=1}^k$ as:
 
@@ -109,9 +109,7 @@ title("Our first fd object")
 In most cases we don't know the basis coefficients. Instead, we have to estimate them from noisy sampled measurements of each curve.
 
 For this practical, we'll assume that we measure each functional observation on a common grid $T$ points $t_1, \dots, t_T$, and these measurements are contaminated with some measurement error (or "noise"):
-$$
-y_{ij} = \underbrace{x_i(t_{j})}_{\text{smooth function}} + \underbrace{\epsilon_{ij}}_{\text{noise}}.
-$$
+$$y_{ij} = \underbrace{x_i(t_{j})}_{\text{smooth function}} + \underbrace{\epsilon_{ij}}_{\text{noise}}.$$
 **--introduce data--**
 
 ---
@@ -226,8 +224,6 @@ plot(log10_lambda_range,
      ylab = "GCV")
 best_lambda_index <- which.min(gcv_vec)
 abline(v = log10_lambda_range[best_lambda_index])
-
-
 ```
 
 Some more things to try:

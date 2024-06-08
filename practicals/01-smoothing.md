@@ -3,7 +3,7 @@ Part 1: Data Representation and Smoothing
 
 - <a href="#load-packages" id="toc-load-packages">1 Load Packages</a>
 - <a href="#the-fd-class" id="toc-the-fd-class">2 The <code>fd</code>
-  class</a>
+  Class</a>
 - <a href="#producing-smooth-functions-from-noisy-observations"
   id="toc-producing-smooth-functions-from-noisy-observations">3 Producing
   Smooth Functions from Noisy Observations</a>
@@ -28,7 +28,7 @@ library(fda) # load the fda package
 
 ------------------------------------------------------------------------
 
-# 2 The `fd` class
+# 2 The `fd` Class
 
 The `fda` package represents functional observations (i.e., *curves*)
 using a **basis function expansion**. That is, each functional
@@ -167,9 +167,8 @@ estimate them from noisy sampled measurements of each curve.
 For this practical, we’ll assume that we measure each functional
 observation on a common grid $T$ points $t_1, \dots, t_T$, and these
 measurements are contaminated with some measurement error (or “noise”):
-$$
-y_{ij} = \underbrace{x_i(t_{j})}_{\text{smooth function}} + \underbrace{\epsilon_{ij}}_{\text{noise}}.
-$$ **–introduce data–**
+$$y_{ij} = \underbrace{x_i(t_{j})}_{\text{smooth function}} + \underbrace{\epsilon_{ij}}_{\text{noise}}.$$
+**–introduce data–**
 
 ------------------------------------------------------------------------
 
