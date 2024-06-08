@@ -167,8 +167,7 @@ estimate them from noisy sampled measurements of each curve.
 For this practical, we’ll assume that we measure each functional
 observation on a common grid $T$ points $t_1, \dots, t_T$, and these
 measurements are contaminated with some measurement error (or “noise”):
-$$y_{ij} = \underbrace{x_i(t_{j})}_{\text{smooth function}} + \underbrace{\epsilon_{ij}}_{\text{noise}}.$$
-**–introduce data–**
+$$y_{ij} = x(t_{ij}) + \epsilon_{ij}.$$
 
 ------------------------------------------------------------------------
 
@@ -182,9 +181,8 @@ according to some criteria.
 
 The most straightforward way to do this is by **Ordinary Least Squares
 (OLS)**, where for each curve we choose $c_{i1}, \dots, c_{iK}$ to
-minimise the sum of squared errors (SSE): $$
-\text{SSE} = \sum_{j=1}^T \left(y_{ij} - \sum_{k=1}^K c_{ik} \phi(t_{ij})\right)^2.
-$$
+minimise the sum of squared errors (SSE):
+$$SSE = \sum_{j=1}^T \left(y_{ij} - \sum_{k=1}^K c_{ik} \phi(t_{ij})\right)^2.$$
 
 To compute the basis coefficients by OLS we can use the `smooth.basis()`
 function, which takes the following three arguments:
@@ -226,7 +224,7 @@ roughness of the fitted function $$
 $$ This approach is called **Penalised Ordinary Least Squares (P-OLS)**.
 The roughness penalty we will use is on the integrated squared second
 derivative of $x(t)$: $$
-\text{PEN}(x(t)) = \int \left( \frac{\mathrm{d}^2 x(t)}{\mathrm{d}t^2} \right)^2 \mathrm{d}t
+PEN(x(t)) = \int \left( \frac{\mathrm{d}^2 x(t)}{\mathrm{d}t^2} \right)^2 \mathrm{d}t
 $$ Applying P-OLS with `smooth.basis()` is very similar to OLS, but we
 pass a general `fdPar` object (rather than just our `basisfd` object) to
 `fdParobj` argument, to encode information about the basis, the penalty
