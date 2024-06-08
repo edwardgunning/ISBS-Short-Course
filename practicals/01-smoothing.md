@@ -337,9 +337,8 @@ eval.fd(evalarg = t_grid_coarse, fdobj = final_fd)
 
 ## 4.2 Mean Function
 
-The sample mean function
-$$\bar{x}(t) = \frac{1}{N}\sum_{k=1}^K x_i(t),$$ can be calculated using
-the `mean.fd()` function.
+The sample mean function $$\bar{x}(t) = \frac{1}{N}\sum_{i}^N x_i(t),$$
+can be calculated using the `mean.fd()` function.
 
 ``` r
 mean_fd <- mean.fd(x = final_fd)
