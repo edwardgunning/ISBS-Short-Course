@@ -337,8 +337,9 @@ eval.fd(evalarg = t_grid_coarse, fdobj = final_fd)
 
 ## 4.2 Mean Function
 
-The sample mean function $$\bar{x}(t) = \frac{1}{N}\sum_{i}^N x_i(t),$$
-can be calculated using the `mean.fd()` function.
+The sample mean function
+$$\bar{x}(t) = \frac{1}{N}\sum_{i=1}^N x_i(t),$$ can be calculated using
+the `mean.fd()` function.
 
 ``` r
 mean_fd <- mean.fd(x = final_fd)
@@ -355,6 +356,30 @@ mean_fd_02 <- fd(coef = mean_coef, basisobj = final_fd$basis) # create mean fd o
 ```
 
 ## 4.3 Covariance
+
+The sample covariance function
+$$\text{Cov}(x(s), x(t)) = \frac{1}{N-1}\sum_{i=1}^N (x_i(s)-\bar{x}(s))(x_i(t)-\bar{x}(t)),$$
+summarises the dependence among the function values at time $s$ and time
+$t$. It is a bivariate function on a two-dimensional (i.e., rectangular)
+domain. We can compute it for our sample of functional data as follows.
+
+``` r
+cov_fd <- var.fd(fdobj1 = final_fd)
+```
+
+The result is a `bifd` (“bivariate functional data”) objects. We can
+evaluate it on a two-dimensional grid as follows.
+
+``` r
+cov_eval <- eval.bifd(sevalarg = t_grid, tevalarg =  t_grid, bifd = cov_fd)
+```
+
+It can then be visualised using a surface plot, a contour plot or a
+filled contour plot.
+
+``` r
+filled.contour(x = t_grid, y = t_grid, z = cov_eval)
+```
 
 ## 4.4 Boxplots
 
