@@ -361,13 +361,14 @@ The sample covariance function
 $$\text{Cov}(x(s), x(t)) = \frac{1}{N-1}\sum_{i=1}^N (x_i(s)-\bar{x}(s))(x_i(t)-\bar{x}(t)),$$
 summarises the dependence among the function values at time $s$ and time
 $t$. It is a bivariate function on a two-dimensional (i.e., rectangular)
-domain. We can compute it for our sample of functional data as follows.
+domain. We can compute it for our sample of functional data using the
+`var.fd()` function as follows.
 
 ``` r
 cov_fd <- var.fd(fdobj1 = final_fd)
 ```
 
-The result is a `bifd` (“bivariate functional data”) objects. We can
+The result is a `bifd` (“bivariate functional data”) object. We can
 evaluate it on a two-dimensional grid as follows.
 
 ``` r
@@ -375,13 +376,23 @@ cov_eval <- eval.bifd(sevalarg = t_grid, tevalarg =  t_grid, bifd = cov_fd)
 ```
 
 It can then be visualised using a surface plot, a contour plot or a
-filled contour plot.
+filled contour plot. Here, we will create a filled contour plot using
+`filled.contour()`.
 
 ``` r
 filled.contour(x = t_grid, y = t_grid, z = cov_eval)
 ```
 
 ## 4.4 Boxplots
+
+Just as the scalar boxplot provides a simple and intepretable
+five-number summary for scalar data, the *functional boxplot* (Sun and
+Genton, 2009) is a summary graphic for functional data. We produce it
+using the `boxplot.fd()` function as follows.
+
+``` r
+boxplot.fd(x = final_fd)
+```
 
 ## 4.5 Derivatives
 
@@ -398,3 +409,7 @@ filled.contour(x = t_grid, y = t_grid, z = cov_eval)
 - Craven, P., & Wahba, G. (1978). Smoothing noisy data with spline
   functions. Numerische Mathematik, 31(4), 377–403.
   <https://doi.org/10.1007/BF01404567>
+
+- Sun, Y., & Genton, M. G. (2011). Functional Boxplots. Journal of
+  Computational and Graphical Statistics, 20(2), 316–334.
+  <https://doi.org/10.1198/jcgs.2011.09224>
