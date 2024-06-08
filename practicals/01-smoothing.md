@@ -7,8 +7,9 @@ Part 1: Data Representation and Smoothing
 - <a href="#producing-smooth-functions-from-noisy-observations"
   id="toc-producing-smooth-functions-from-noisy-observations">3 Producing
   Smooth Functions from Noisy Observations</a>
-- <a href="#working-with-fd-objects" id="toc-working-with-fd-objects">4
-  Working with <code>fd</code> Objects</a>
+- <a href="#extra-working-with-fd-objects"
+  id="toc-extra-working-with-fd-objects">4 <strong>Extra</strong>: Working
+  with <code>fd</code> Objects</a>
 - <a href="#references" id="toc-references">5 References</a>
 
 <center>
@@ -316,17 +317,48 @@ abline(v = log10_lambda_range[best_lambda_index])
 
 - How would you deal with curves measured at different time points?
 
-# 4 Working with `fd` Objects
+# 4 **Extra**: Working with `fd` Objects
 
-Evaluating
+Given the `fd()` object, the following are among the many operations we
+can use to summarise and explore the functional dataset.
 
-Mean – show mean of coefficients.
+## 4.1 Evaluation
 
-Covariance – just calculation
+To evaluate the functions on a grid of points we use the `eval.fd()`
+function. This returns a $T^* \times N$ matrix, where $T^*$ is the
+number of grid points.
 
-Boxplot – add more.
+``` r
+# define coarse grid
+t_grid_coarse <- seq(0, 100, lentgth.out = 10)
+# evaluate on that grid
+eval.fd(evalarg = t_grid_coarse, fdobj = final_fd)
+```
 
-Derivatives + add code
+## 4.2 Mean Function
+
+The sample mean function $\bar{x}(t) = \frac{1}{N}\sum_{k=1}^K x_i(t)$
+can be calculated using the `mean.fd()` function.
+
+``` r
+mean_fd <- mean.fd(x = final_fd)
+```
+
+However, as the mean functional object is just given by the mean of the
+coefficients combined with the same basis, we can do this manually as
+follows.
+
+``` r
+final_coef <- final_fd$coef # extract coefficients
+mean_coef <- apply(final_coef, 1, mean, simplify = FALSE) # average them
+mean_fd_02 <- fd(coef = mean_coef, basisobj = final_fd$basis) # create mean fd object manually
+```
+
+## 4.3 Covariance
+
+## 4.4 Boxplots
+
+## 4.5 Derivatives
 
 ------------------------------------------------------------------------
 

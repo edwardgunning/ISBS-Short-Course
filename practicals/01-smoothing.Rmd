@@ -4,6 +4,7 @@ output:
   github_document:
     number_sections: true
     toc: true
+    toc_depth: 1
 ---
 
 ```{r setup, include=FALSE}
@@ -230,17 +231,41 @@ abline(v = log10_lambda_range[best_lambda_index])
 ---
 ---
 
-# Working with `fd` Objects
+# **Extra**: Working with `fd` Objects
 
-Evaluating 
+Given the `fd()` object, the following are among the many operations we can use to summarise and explore the functional dataset.
 
-Mean -- show mean of coefficients.
+## Evaluation
 
-Covariance -- just calculation
+To evaluate the functions on a grid of points we use the `eval.fd()` function. This returns a $T^* \times N$ matrix, where $T^*$ is the number of grid points.
 
-Boxplot -- add more.
+```{r, eval = FALSE}
+# define coarse grid
+t_grid_coarse <- seq(0, 100, lentgth.out = 10)
+# evaluate on that grid
+eval.fd(evalarg = t_grid_coarse, fdobj = final_fd)
+```
 
-Derivatives + add code
+## Mean Function
+
+The sample mean function $\bar{x}(t) = \frac{1}{N}\sum_{k=1}^K x_i(t)$ can be calculated using the `mean.fd()` function.
+
+```{r, eval = F}
+mean_fd <- mean.fd(x = final_fd)
+```
+However, as the mean functional object is just given by the mean of the coefficients combined with the same basis, we can do this manually as follows.
+
+```{r, eval = F}
+final_coef <- final_fd$coef # extract coefficients
+mean_coef <- apply(final_coef, 1, mean, simplify = FALSE) # average them
+mean_fd_02 <- fd(coef = mean_coef, basisobj = final_fd$basis) # create mean fd object manually
+```
+
+## Covariance
+
+## Boxplots
+
+## Derivatives
 
 ---
 
