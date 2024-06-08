@@ -74,7 +74,7 @@ install.packages("refund") # install the refund package
 
 ------------------------------------------------------------------------
 
-# Schedule
+# ⏱️ Schedule
 
 |              Time | Topic                    | Format                |  Lead   | Material |
 |------------------:|:-------------------------|-----------------------|:-------:|:---------|

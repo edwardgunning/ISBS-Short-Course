@@ -228,8 +228,8 @@ $$PEN(x(t)) = \int \left( \frac{\mathrm{d}^2 x(t)}{\mathrm{d}t^2} \right)^2 \mat
 Applying P-OLS with `smooth.basis()` is very similar to OLS, but we pass
 a general `fdPar` object (rather than just our `basisfd` object) to
 `fdParobj` argument, to encode information about the basis, the penalty
-and the smoothing parameter $\lambda$: The we create this object using
-the `fdPar()` function, and then pass the following arguments:
+and the smoothing parameter $\lambda$. We create this object using the
+`fdPar()` function, passing the following arguments:
 
 - `fdobj`: here we just supply our basis.
 
@@ -306,13 +306,15 @@ best_lambda_index <- which.min(gcv_vec)
 abline(v = log10_lambda_range[best_lambda_index])
 ```
 
-Some more things to try:
+**Some points to try or discuss in the Q&A:**
 
-- Think about how you would code ordinary cross-validation
-  (leave-one-out and $k$-fold).
+- How you would code ordinary cross-validation (leave-one-out and
+  $k$-fold)?
 
-- Think about how you would examine regression assumptions using what is
-  returned by `smooth.basis()`.
+- How would you examine regression assumptions using what is returned by
+  `smooth.basis()`?
+
+- How would you deal with curves measured at different time points?
 
 # 4 Working with `fd` Objects
 
