@@ -182,7 +182,7 @@ according to some criteria.
 The most straightforward way to do this is by **Ordinary Least Squares
 (OLS)**, where for each curve we choose $c_{i1}, \dots, c_{iK}$ to
 minimise the sum of squared errors (SSE):
-$$SSE = \sum_{j=1}^T \left(y_{ij} - \sum_{k=1}^K c_{ik} \phi(t_j)\right)^2.$$
+$$SSE = \sum_{j=1}^T \left(y_{ij} - \sum_{k=1}^K c_{ik} \phi_k(t_j)\right)^2.$$
 
 To compute the basis coefficients by OLS we can use the `smooth.basis()`
 function, which takes the following three arguments:
@@ -220,7 +220,7 @@ number of basis functions $K$.
 A more flexible approach is to choose a risch basis (i.e., a large value
 of $K$) and add a penalty to the SSE criterion that penalises the
 roughness of the fitted function
-$$PENSSE =  \underbrace{\sum_{j=1}^T \left(y_{ij} - \sum_{k=1}^K c_{ik} \phi(t_j)\right)^2}_{SSE} + \lambda \text{PEN}(x(t)).$$
+$$PENSSE =  \underbrace{\sum_{j=1}^T \left(y_{ij} - \sum_{k=1}^K c_{ik} \phi_k(t_j)\right)^2}_{SSE} + \lambda \text{PEN}(x(t)).$$
 This approach is called **Penalised Ordinary Least Squares (P-OLS)**.
 The roughness penalty we will use is on the integrated squared second
 derivative of $x(t)$:

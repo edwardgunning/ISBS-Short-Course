@@ -118,7 +118,7 @@ When creating our `fd` object, we want to recover the underlying functions $x_1(
 We can do this using a basis expansion, choosing a system of basis functions $\{\phi_k(t)\}$, and then estimating the basis coefficients according to some criteria.
 
 The most straightforward way to do this is by **Ordinary Least Squares (OLS)**, where for each curve we choose $c_{i1}, \dots, c_{iK}$ to minimise the sum of squared errors (SSE):
-$$SSE = \sum_{j=1}^T \left(y_{ij} - \sum_{k=1}^K c_{ik} \phi(t_j)\right)^2.$$
+$$SSE = \sum_{j=1}^T \left(y_{ij} - \sum_{k=1}^K c_{ik} \phi_k(t_j)\right)^2.$$
 
 To compute the basis coefficients by OLS we can use the `smooth.basis()` function, which takes the following three arguments:
 
@@ -147,7 +147,7 @@ With the OLS, the smoothness of the fitted curve is controlled by the number of 
 ```
 
 A more flexible approach is to choose a risch basis (i.e., a large value of $K$) and add a penalty to the SSE criterion that penalises the roughness of the fitted function
-$$PENSSE =  \underbrace{\sum_{j=1}^T \left(y_{ij} - \sum_{k=1}^K c_{ik} \phi(t_j)\right)^2}_{SSE} + \lambda \text{PEN}(x(t)).$$
+$$PENSSE =  \underbrace{\sum_{j=1}^T \left(y_{ij} - \sum_{k=1}^K c_{ik} \phi_k(t_j)\right)^2}_{SSE} + \lambda \text{PEN}(x(t)).$$
 This approach is called **Penalised Ordinary Least Squares (P-OLS)**. The roughness penalty we will use is on the integrated squared second derivative of $x(t)$:
 $$PEN(x(t)) = \int \left( \frac{\mathrm{d}^2 x(t)}{\mathrm{d}t^2} \right)^2 \mathrm{d}t$$
 Applying P-OLS with `smooth.basis()` is very similar to OLS, but we pass a general `fdPar` object (rather than just our `basisfd` object) to `fdParobj` argument, to encode information about the basis, the penalty and the smoothing parameter $\lambda$.
