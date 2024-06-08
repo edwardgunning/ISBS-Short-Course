@@ -218,9 +218,9 @@ number of basis functions $K$.
 ```
 
 A more flexible approach is to choose a risch basis (i.e., a large value
-of $K$) and and add a penalty to the SSE criterion that penalises the
+of $K$) and add a penalty to the SSE criterion that penalises the
 roughness of the fitted function
-$$\text{PENSSE} =  \underbrace{\sum_{j=1}^T \left(y_{ij} - \sum_{k=1}^K c_{ik} \phi(t_{ij})\right)^2}_{SSE} + \lambda \underbrace{\text{PEN}(x(t))}_{Roughness \ penalty}.$$
+$$PENSSE =  \underbrace{\sum_{j=1}^T \left(y_{ij} - \sum_{k=1}^K c_{ik} \phi(t_{ij})\right)^2}_{SSE} + \lambda \text{PEN}(x(t)).$$
 This approach is called **Penalised Ordinary Least Squares (P-OLS)**.
 The roughness penalty we will use is on the integrated squared second
 derivative of $x(t)$:
