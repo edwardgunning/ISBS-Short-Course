@@ -35,7 +35,7 @@ The `fda` package represents functional observations (i.e., *curves*)
 using a **basis function expansion**. That is, each functional
 observation $x_i(t), \ i = 1, \dots, N$ is represented as a linear
 combination (or weighted sum) of known basis functions
-$\\{\phi_k(t)\\}_{k=1}^k$ as:
+$\\{\phi_k(t)\\}_{k=1}^K$ as:
 
 $$x_i (t)=\sum_{k=1}^{K} c_{ik} \phi_k(t).$$
 
