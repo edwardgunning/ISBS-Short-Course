@@ -60,10 +60,15 @@ install.packages("refund") # install the refund package
 
 # 📒 Material
 
-- [**Lecture slides**](slides/template-slides.pptx)
-
+- **Lecture Slides:**
+  - [Welcome and introduction](slides/01-welcome.pptx)
+  - [Part 1 – Data representation and
+    smoothing](slides/02-smoothing.pptx)
+  - [Part 2 – Registration](slides/03-registration.pptx)
+  - [Part 3 – Functional Principal Components Analysis
+    (FPCA)](slides/04-fpca.pptx)
+  - [Part 4 – Functional regression](slides/05-fregression.pptx)
 - **Practical Material**:
-
   - [Part 1 – Data representation and
     smoothing](practicals/01-smoothing.md)
   - [Part 2 – Registration](practicals/02-registration.md)
