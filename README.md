@@ -78,11 +78,11 @@ install.packages("refund") # install the refund package
 
 |              Time | Topic                    | Format                |  Lead   | Material |
 |------------------:|:-------------------------|-----------------------|:-------:|:---------|
-| $09.30$ - $10.15$ | Welcome and Introduction | Lecture               |   DH    | [](link) |
-| $10.15$ - $10.35$ | Coffee Break             |                       |         |          |
-| $10.35$ - $12.15$ | Foundations of FDA       | Lecture               | DH & EG | [](link) |
-| $12.15$ - $13.35$ | Lunch                    |                       |         |          |
-| $13.35$ - $15.15$ | Hands-on FDA with **R**  | Practical (groups)    |   EG    | [](link) |
+| $09.00$ - $09.30$ | Welcome and Introduction | Lecture               |   DH    | [](link) |
+| $09.30$ - $09.50$ | Coffee Break             |                       |         |          |
+| $09.50$ - $12.00$ | Foundations of FDA       | Lecture               | DH & EG | [](link) |
+| $12.00$ - $13.00$ | Lunch                    |                       |         |          |
+| $13.00$ - $15.00$ | Hands-on FDA with **R**  | Practical (groups)    |   EG    | [](link) |
 | $15.15$ - $16.00$ | Q&A with Coffee          | Group Discussion/ Q&A | DH & EG |          |
 
 ------------------------------------------------------------------------
