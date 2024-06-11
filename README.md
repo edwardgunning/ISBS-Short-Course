@@ -127,3 +127,65 @@ install.packages("refund") # install the refund package
 
 - [CRAN Task View: Functional Data
   Analysis](https://cran.r-project.org/web/views/FunctionalData.html)
+
+------------------------------------------------------------------------
+
+# 💾 Software Information (Reproducibility)
+
+``` r
+R.version # version of R
+```
+
+    ##                _                           
+    ## platform       x86_64-apple-darwin17.0     
+    ## arch           x86_64                      
+    ## os             darwin17.0                  
+    ## system         x86_64, darwin17.0          
+    ## status                                     
+    ## major          4                           
+    ## minor          1.2                         
+    ## year           2021                        
+    ## month          11                          
+    ## day            01                          
+    ## svn rev        81115                       
+    ## language       R                           
+    ## version.string R version 4.1.2 (2021-11-01)
+    ## nickname       Bird Hippie
+
+``` r
+# package versions:
+packageVersion("fda") 
+```
+
+    ## [1] '5.5.1'
+
+``` r
+packageVersion("refund")
+```
+
+    ## [1] '0.1.26'
+
+``` r
+sessionInfo() # R session info.
+```
+
+    ## R version 4.1.2 (2021-11-01)
+    ## Platform: x86_64-apple-darwin17.0 (64-bit)
+    ## Running under: macOS Big Sur 10.16
+    ## 
+    ## Matrix products: default
+    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib
+    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
+    ## 
+    ## locale:
+    ## [1] en_IE.UTF-8/en_IE.UTF-8/en_IE.UTF-8/C/en_IE.UTF-8/en_IE.UTF-8
+    ## 
+    ## attached base packages:
+    ## [1] stats     graphics  grDevices utils     datasets  methods   base     
+    ## 
+    ## loaded via a namespace (and not attached):
+    ##  [1] compiler_4.1.2  magrittr_2.0.2  fastmap_1.1.0   cli_3.6.1      
+    ##  [5] tools_4.1.2     htmltools_0.5.5 rstudioapi_0.13 yaml_2.3.5     
+    ##  [9] stringi_1.7.6   rmarkdown_2.11  knitr_1.37      stringr_1.4.0  
+    ## [13] xfun_0.39       digest_0.6.29   mime_0.12       rlang_1.1.1    
+    ## [17] evaluate_0.15
