@@ -3,7 +3,7 @@ Part 3: Functional Principal Components Analysis
 
 <center>
 
-![](../logo/isbs-logo.png) ![](../logo/whitespace.png)
+![](../logo/ISBS-Logo-2024.png) ![](../logo/whitespace.png)
 ![](../logo/fda-logo.png)
 
 </center>

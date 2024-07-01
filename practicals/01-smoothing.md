@@ -1,20 +1,17 @@
 Part 1: Data Representation and Smoothing
 ================
 
-- <a href="#load-packages" id="toc-load-packages">1 Load Packages</a>
-- <a href="#the-fd-class" id="toc-the-fd-class">2 The <code>fd</code>
-  Class</a>
-- <a href="#producing-smooth-functions-from-noisy-observations"
-  id="toc-producing-smooth-functions-from-noisy-observations">3 Producing
-  Smooth Functions from Noisy Observations</a>
-- <a href="#extra-working-with-fd-objects"
-  id="toc-extra-working-with-fd-objects">4 <strong>Extra</strong>: Working
-  with <code>fd</code> Objects</a>
-- <a href="#references" id="toc-references">5 References</a>
+- [1 Load Packages](#1-load-packages)
+- [2 The `fd` Class](#2-the-fd-class)
+- [3 Producing Smooth Functions from Noisy
+  Observations](#3-producing-smooth-functions-from-noisy-observations)
+- [4 **Extra**: Working with `fd`
+  Objects](#4-extra-working-with-fd-objects)
+- [5 References](#5-references)
 
 <center>
 
-![](../logo/isbs-logo.png) ![](../logo/whitespace.png)
+![](../logo/ISBS-Logo-2024.png) ![](../logo/whitespace.png)
 ![](../logo/fda-logo.png)
 
 </center>
@@ -52,9 +49,12 @@ $x_1(t), \dots, x_N(t)$ should comprise two component parts:
     observations we have an $K \times N$ matrix of basis coefficients.
 
 **Examples:**
+
 <details>
 <summary>
+
 <b>Construct a cubic B-spline basis with 20 basis functions</b>
+
 </summary>
 
 ``` r
@@ -81,10 +81,13 @@ plot(bspl_20)
 ```
 
 <img src="01-smoothing_files/figure-gfm/create-bspline-1.png" style="display: block; margin: auto;" />
+
 </details>
 <details>
 <summary>
+
 <b>Construct a Fourier basis with 15 basis functions</b>
+
 </summary>
 
 ``` r
@@ -96,6 +99,7 @@ plot(fourier_15)
 ```
 
 <img src="01-smoothing_files/figure-gfm/create-fourier-1.png" style="display: block; margin: auto;" />
+
 </details>
 
 ------------------------------------------------------------------------
