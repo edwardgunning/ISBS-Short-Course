@@ -125,7 +125,7 @@ ximarks_mat[, 2] <- t_max
 x0marks_vec <- c(mean(t_min), mean(t_max))
 ```
 
-* `Wfdpar` (and `Wfd0par): a functional parameter object defining the (inverse) warping functions. For this we first set up a B-spline basis with interior knots at the mean values of the two landmarks using the `breaks` argument.
+* `Wfdpar` (and `Wfd0par`): a functional parameter object defining the (inverse) warping functions. For this we first set up a B-spline basis with interior knots at the mean values of the two landmarks using the `breaks` argument.
 
 ```{r}
 bspline_basis_wfd <- create.bspline.basis(rangeval = c(0, 100),
