@@ -45,6 +45,11 @@ cloud*](https://posit.cloud/). Watch [this video from Posit
 PBC](https://www.youtube.com/watch?v=-fzwm4ZhVQQ) to set up an account
 and get started.
 
+We also recommend setting up an RStudio project to work and store your
+files for this workshop in – see [this helpful guide on setting up
+projects by Posit
+PBC](https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects).
+
 ## R Packages
 
 For this workshop, we will primarily use the `fda` (Ramsay, Graves and

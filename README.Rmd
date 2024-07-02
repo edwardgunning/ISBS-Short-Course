@@ -56,6 +56,8 @@ You should bring your own laptop with the following software installed:
 
 **Note**: If you are unable to install R and RStudio, you can work with a free, lite web version of RStudio called [*posit cloud*](https://posit.cloud/). Watch [this video from Posit PBC](https://www.youtube.com/watch?v=-fzwm4ZhVQQ) to set up an account and get started.
 
+We also recommend setting up an RStudio project to work and store your files for this workshop in -- see [this helpful guide on setting up projects by Posit PBC](https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects).
+
 ## R Packages
 
 For this workshop, we will primarily use the `fda` (Ramsay, Graves and  Hooker, 2021) and `refund` (Goldsmith et al., 2022) packages.
