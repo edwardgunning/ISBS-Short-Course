@@ -5,6 +5,8 @@ Part 2: Registration
 - [2 Data](#2-data)
 - [3 Landmark Registration](#3-landmark-registration)
 - [4 References](#4-references)
+- [5 Session Information
+  (Reproducibility)](#5-session-information-reproducibility)
 
 <center>
 
@@ -387,3 +389,40 @@ through a sensitivity analysis.
 - **Chapter 8 of** Ramsay, J. O., Hooker, G., & Graves, S. (2009).
   Functional Data Analysis with R and MATLAB. Springer-Verlag.
   <https://doi.org/10.1007/978-0-387-98185-7>
+
+# 5 Session Information (Reproducibility)
+
+``` r
+sessionInfo()
+```
+
+    ## R version 4.4.1 (2024-06-14)
+    ## Platform: aarch64-apple-darwin20
+    ## Running under: macOS Sonoma 14.4
+    ## 
+    ## Matrix products: default
+    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib 
+    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
+    ## 
+    ## locale:
+    ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+    ## 
+    ## time zone: America/New_York
+    ## tzcode source: internal
+    ## 
+    ## attached base packages:
+    ## [1] splines   stats     graphics  grDevices utils     datasets  methods  
+    ## [8] base     
+    ## 
+    ## other attached packages:
+    ## [1] fda_6.1.8       deSolve_1.40    fds_1.8         RCurl_1.98-1.14
+    ## [5] rainbow_3.8     pcaPP_2.0-4     MASS_7.3-60.2  
+    ## 
+    ## loaded via a namespace (and not attached):
+    ##  [1] cli_3.6.3          knitr_1.47         rlang_1.1.4        xfun_0.45         
+    ##  [5] highr_0.11         KernSmooth_2.23-24 mclust_6.1.1       hdrcde_3.4        
+    ##  [9] colorspace_2.1-0   htmltools_0.5.8.1  pracma_2.4.4       rmarkdown_2.27    
+    ## [13] grid_4.4.1         evaluate_0.24.0    bitops_1.0-7       ks_1.14.2         
+    ## [17] fastmap_1.2.0      yaml_2.3.8         mvtnorm_1.2-5      cluster_2.1.6     
+    ## [21] compiler_4.4.1     rstudioapi_0.16.0  lattice_0.22-6     digest_0.6.36     
+    ## [25] Matrix_1.7-0       tools_4.4.1
