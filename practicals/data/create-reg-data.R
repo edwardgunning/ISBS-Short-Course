@@ -13,4 +13,4 @@ info_df <- data
 
 saveRDS(object = list(y_fd = y_fd,
                       info_df = info_df), 
-        file = here::here("practicals", "data/reg-data.rds"))
+        file = here::here("practicals", "reg-data.rds"))
