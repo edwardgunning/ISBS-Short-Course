@@ -1,6 +1,7 @@
 Part 1: Data Representation and Smoothing
 ================
 
+<<<<<<< HEAD
 - <a href="#1-load-packages" id="toc-1-load-packages">1 Load Packages</a>
 - <a href="#2-the-fd-class" id="toc-2-the-fd-class">2 The <code>fd</code>
   Class</a>
@@ -13,10 +14,19 @@ Part 1: Data Representation and Smoothing
   id="toc-5-extra-working-with-fd-objects">5 <strong>Extra</strong>:
   Working with <code>fd</code> Objects</a>
 - <a href="#6-references" id="toc-6-references">6 References</a>
+=======
+- [1 Load Packages](#1-load-packages)
+- [2 The `fd` Class](#2-the-fd-class)
+- [3 Producing Smooth Functions from Noisy
+  Observations](#3-producing-smooth-functions-from-noisy-observations)
+- [4 **Extra**: Working with `fd`
+  Objects](#4-extra-working-with-fd-objects)
+- [5 References](#5-references)
+>>>>>>> a3c9d46543f65fafb78a90547f775f7ad91f938f
 
 <center>
 
-![](../logo/isbs-logo.png) ![](../logo/whitespace.png)
+![](../logo/ISBS-Logo-2024.png) ![](../logo/whitespace.png)
 ![](../logo/fda-logo.png)
 
 </center>
