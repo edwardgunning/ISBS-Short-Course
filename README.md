@@ -50,6 +50,19 @@ files for this workshop in – see [this helpful guide on setting up
 projects by Posit
 PBC](https://support.posit.co/hc/en-us/articles/200526207-Using-RStudio-Projects).
 
+**IMPORTANT**: **We do not require any previous knowledge of R
+programming or FDA**. We have structured the lecture and practical
+sessions in such a way that all levels of experience will be catered
+for. However, if interested, our favourite (free!) resources for getting
+up to speed with R are:
+
+- [R for Data Science (2nd Edition)](https://r4ds.hadley.nz/) by Hadley
+  Wickham, Mine Çetinkaya-Rundel, and Garrett Grolemund.
+
+- [R Programming for Data
+  Science](https://bookdown.org/rdpeng/rprogdatascience/) by Roger D.
+  Peng.
+
 ## R Packages
 
 For this workshop, we will primarily use the `fda` (Ramsay, Graves and
@@ -66,7 +79,9 @@ install.packages("refund") # install the refund package
 
 # 📒 Material
 
-- **Lecture Slides:**
+- **Lecture Slides** (these MS Powerpoint slides will not preview in
+  GitHub, so you will need to click the ![](logo/download-raw-file.png)
+  icon on the top right to download):
   - [Welcome and introduction](slides/01-welcome.pptx)
   - [Part 1 – Data representation and
     smoothing](slides/02-smoothing.pptx)
