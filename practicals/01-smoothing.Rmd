@@ -103,6 +103,48 @@ title("Our first fd object")
 
 ---
 
+# The Children's Gait Data
+
+For this practical we will use the children's gait dataset -- we want to convert the discrete noisy measurements of each child's hip angle to smooth functions.
+
+The data are already loaded (once we have loaded the `fda` package) in an object named `gait`, so we can inspect them as follows (type `?gait` for more information):
+
+```{r}
+gait
+```
+
+The data are stored in a $20 \times 39 \times 2$ array -- we have $39$ observations (boys) measured at $20$ time points -- the hip and the knee angles are contained in the two array slices.
+
+```{r}
+dim(gait) # get dimensions of the array
+```
+For this practical, we will only focus on the hip angle, which is contained in the first slice.
+
+```{r}
+hip <- gait[,,1]
+```
+
+We also are provided with an object called `gaittime`, which is a vector of points that represent the $20$ time points at which the curves are measured. These have been normalised so that $0.025$ is the first measured time point and $0.975$ the last.
+
+```{r}
+(t_grid <- as.numeric(dimnames(gait)[[1]]))
+# or from help file:
+# seq(from=0.025, to=0.975, by=0.05)
+```
+
+Now we can plot the data matrix using the `matplot()` command.
+
+```{r}
+matplot(x = t_grid, 
+        y = hip,
+        type = "b", # both lines and points
+        pch = 20, # dots for points
+        xlab = "Normalised time (prop. of gait cycle)",
+        ylab = "Hip angle (deg)")
+```
+
+**Note:** Although this dataset is small compared to biomechanical datasets nowadays which might be sampled at $5 \times$ the sampling rate (or more), it serves as a useful case study for familiarising ourselves with the implementations of basis expansions and smoothing in the `fda` package.
+
 ---
 
 # Producing Smooth Functions from Noisy Observations
@@ -129,22 +171,39 @@ To compute the basis coefficients by OLS we can use the `smooth.basis()` functio
 
 * `fdParobj`: For OLS, we just supply the `basisobj` we are using to represent the curves.
 
-```{r, eval = FALSE}
-ols_fdSmooth <- smooth.basis(argvals = t_grid, y = Y_mat, fdParobj = bspl_35)
+For now, we'll start with a basis of $10$ cubic B-spline basis functions.
+
+```{r}
+bspl_10 <- create.bspline.basis(rangeval = range(t_grid), nbasis = 10, norder = 4)
+ols_fdSmooth <- smooth.basis(argvals = t_grid, y = hip, fdParobj = bspl_10)
 ```
 
 The `smooth.basis()` function returns an `fdSmooth` object. The most important part of this object is the `fd` element -- this is an `fd` object comprising the basis we have supplied and the coefficients we have estimated, so it represents our dataset of smoothed curves.
 
-```{r, eval = FALSE}
+```{r}
 ols_fd <- ols_fdSmooth$fd # or ols_fdSmooth[["fd]]
-plot(ols_fd[1:3,], xlab = "t", ylab = "x(t)")
-matpoints(x = t_grid, y = Y_mat[, 1:3], pch = 20) # overl
+plot(ols_fd[1:3,],
+     xlab = "Normalised time (prop. of gait cycle)",
+     ylab = "Hip angle (deg)")
+matpoints(x = t_grid, y = hip[, 1:3], pch = 20) # overlay
 ```
 
-With the OLS, the smoothness of the fitted curve is controlled by the number of basis functions $K$.
+With the OLS, the smoothness of the fitted curve is controlled by the number of basis functions $K$. We'll choose a single curve, and look at the fits using different values of $K$:
 
 ```{r}
-# add loop with K
+plot(t_grid, hip[,1],  # plot raw data (1st curve)
+     pch = 20,
+    xlab = "Normalised time (prop. of gait cycle)",
+    ylab = "Hip angle (deg)")
+     
+K_seq <- seq(4, 20, by = 2)
+
+for(Ki in seq_along(K_seq)) {
+  bspl_K <- create.bspline.basis(rangeval = range(t_grid), nbasis = K_seq[Ki], norder = 4)
+  ols_fdSmooth_K <- smooth.basis(argvals = t_grid, y = hip[,1], fdParobj = bspl_K)
+  lines(ols_fdSmooth_K$fd, col = Ki)
+}
+legend("top", legend = paste0("K = ", K_seq), col = seq_along(K_seq), lty = 1)
 ```
 
 A more flexible approach is to choose a risch basis (i.e., a large value of $K$) and add a penalty to the SSE criterion that penalises the roughness of the fitted function
@@ -160,43 +219,47 @@ We create this object using the `fdPar()` function, passing the following argume
 
 * `lambda` specifies the value of the smoothing parameter $\lambda$.
 
-```{r, eval = FALSE}
+In our case, we'll use a basis of $20$ basis functions, which is rich given that the curves are sampled at $20$ points. We pass this to a `fdPar()` function call using the arguments above to create our `fdParobj` for P-OLS.
+
+```{r}
+bspl_20 <- create.bspline.basis(rangeval = range(t_grid), nbasis = 20, norder = 4)
 fdParobj_pols <-fdPar(fdobj = bspl_20, Lfdobj = int2Lfd(m = 2), lambda = 1)
 ```
 
 We then pass the `fdPar` object that we have created to the `fdParobj` argument in `smooth.basis()` to perform P-OLS smoothing.
 
-```{r, eval = FALSE}
-pls_fdSmooth <- smooth.basis(argvals = t_grid, y = Y_mat, fdParobj = fdParobj_pols)
+```{r}
+pls_fdSmooth <- smooth.basis(argvals = t_grid, y = hip, fdParobj = fdParobj_pols)
 ```
 
 Let's view the effect on the fit of a single curve when we vary $\lambda$:
 
-```{r, eval = FALSE, fig.asp=0.8, fig.width=6}
+```{r, fig.asp=0.8, fig.width=6}
 # create grid of values for lambda varying on a log10 scale
-log10_lambda_range <- seq(-10, 10, by = 1)
+log10_lambda_range <- seq(-10, 6, by = 2)
 lambda_range <- 10^log10_lambda_range
 n_lambda <- length(lambda_range) # how many values we're trialling
 
-plot(x = t_grid, y = Y[, 1], pch = 20) # plot underlying data (first curve)
+plot(x = t_grid, y = hip[, 1], pch = 20) # plot underlying data (first curve)
 for(lam in seq_len(n_lambda)) {
   # loop through different lambdas
   fdParobj_lam <- fdPar(fdobj = bspl_20, 
                         Lfdobj = int2Lfd(m = 2),
                         lambda = lambda_range[lam]) # create fdPar with chosen lambda
   # do p-ols with chosen lambda:
-  pls_fdSmooth_lam <- smooth.basis(argvals = t_grid, y = Y_mat, fdParobj = fdParobj_lam)
+  pls_fdSmooth_lam <- smooth.basis(argvals = t_grid, y = hip, fdParobj = fdParobj_lam)
   # extract fd object:
   pls_fd_lam <- pls_fdSmooth_lam$fd
   # overlay line of current fit
-  lines.fd(pls_fd_lam[1, ], col = lam)
+  lines(pls_fd_lam[1, ], col = lam)
 }
+legend("top", legend = paste0("lambda = ", lambda_range), col = seq_len(n_lambda), lty = 1)
 ```
 
 For choosing an optimal value of $\lambda$, we typically minimise some measure of fit to the data that is discounted for the complexity of the model. A common measure is the Generalised Cross Validation (GCV) criterion (Craven and Wahba, 1979). It is returned automatically as part of the `fdSmooth` object returned by `smooth.basis()`. 
 In the following, we loop through a range of values for $\lambda$ to find the one that provides the minimum GCV value:
 
-```{r gcv-search, eval = FALSE, fig.asp=0.8, fig.width=6}
+```{r gcv-search, fig.asp=0.8, fig.width=6}
 # create vcector to store the GCV values:
 gcv_vec <- vector(mode = "numeric", length = n_lambda)
 
@@ -206,9 +269,9 @@ for(lam in seq_len(n_lambda)) {
                         Lfdobj = int2Lfd(m = 2),
                         lambda = lambda_range[lam]) # create fdPar with chosen lambda
   # do p-ols with chosen lambda:
-  pls_fdSmooth_lam <- smooth.basis(argvals = t_grid, y = Y_mat, fdParobj = fdParobj_lam)
+  pls_fdSmooth_lam <- smooth.basis(argvals = t_grid, y = hip, fdParobj = fdParobj_lam)
   # store resulting GCV:
-  gcv_vec[lam] <- pls_fdSmooth_lam$gcv
+  gcv_vec[lam] <- mean(pls_fdSmooth_lam$gcv)
 }
 
 plot(log10_lambda_range, 
@@ -218,6 +281,16 @@ plot(log10_lambda_range,
      ylab = "GCV")
 best_lambda_index <- which.min(gcv_vec)
 abline(v = log10_lambda_range[best_lambda_index])
+```
+
+Now let's set up our final smoothed object as the one returned by setting $\lambda$ at its optimum value.
+
+```{r}
+fdParobj_final <- fdPar(fdobj = bspl_20, 
+                        Lfdobj = int2Lfd(m = 2),
+                        lambda = lambda_range[best_lambda_index]) # create fdPar with chosen 
+pls_fdSmooth_final <- smooth.basis(argvals = t_grid, y = hip, fdParobj = fdParobj_final)
+final_fd <- pls_fdSmooth_final$fd
 ```
 
 **Some points to try or discuss in the Q&A:**
@@ -239,9 +312,9 @@ Given the `fd()` object, the following are among the many operations we can use 
 
 To evaluate the functions on a grid of points we use the `eval.fd()` function. This returns a $T^* \times N$ matrix, where $T^*$ is the number of grid points.
 
-```{r, eval = FALSE}
+```{r}
 # define coarse grid
-t_grid_coarse <- seq(0, 100, lentgth.out = 10)
+t_grid_coarse <- seq(min(t_grid), max(t_grid), length.out = 10)
 # evaluate on that grid
 eval.fd(evalarg = t_grid_coarse, fdobj = final_fd)
 ```
@@ -250,15 +323,23 @@ eval.fd(evalarg = t_grid_coarse, fdobj = final_fd)
 
 The sample mean function $$\bar{x}(t) = \frac{1}{N}\sum_{i=1}^N x_i(t),$$ can be calculated using the `mean.fd()` function.
 
-```{r, eval = F}
+```{r}
 mean_fd <- mean.fd(x = final_fd)
 ```
 However, as the mean functional object is just given by the mean of the coefficients combined with the same basis, we can do this manually as follows.
 
-```{r, eval = F}
+```{r}
 final_coef <- final_fd$coef # extract coefficients
-mean_coef <- apply(final_coef, 1, mean, simplify = FALSE) # average them
+mean_coef <- apply(final_coef, 1, mean) # average them
 mean_fd_02 <- fd(coef = mean_coef, basisobj = final_fd$basis) # create mean fd object manually
+```
+
+Let's overlay the mean on a plot of the data:
+
+```{r}
+plot(final_fd)
+lines(mean_fd, lwd = 3)
+lines(mean_fd_02, lwd = 3)
 ```
 
 ## Covariance
@@ -267,19 +348,19 @@ The sample covariance function $$\text{Cov}(x(s), x(t)) = \frac{1}{N-1}\sum_{i=1
 It is a bivariate function on a two-dimensional (i.e., rectangular) domain.
 We can compute it for our sample of functional data using the `var.fd()` function as follows.
 
-```{r covariance, eval = FALSE}
+```{r covariance}
 cov_fd <- var.fd(fdobj1 = final_fd)
 ```
 
 The result is a `bifd` ("bivariate functional data") object. We can evaluate it on a two-dimensional grid as follows.
 
-```{r covariance eval, eval = FALSE}
+```{r covariance eval}
 cov_eval <- eval.bifd(sevalarg = t_grid, tevalarg =  t_grid, bifd = cov_fd)
 ```
 
 It can then be visualised using a surface plot, a contour plot or a filled contour plot. Here, we will create a filled contour plot using `filled.contour()`.
 
-```{r covariance view, eval = FALSE}
+```{r covariance view}
 filled.contour(x = t_grid, y = t_grid, z = cov_eval)
 ```
 
@@ -287,21 +368,35 @@ filled.contour(x = t_grid, y = t_grid, z = cov_eval)
 
 Just as the scalar boxplot provides a simple and intepretable five-number summary for scalar data, the *functional boxplot* (Sun and Genton, 2009) is a summary graphic for functional data. We produce it using the `boxplot.fd()` function as follows.
 
-```{r fboxplot, eval = FALSE, fig.asp=0.8, fig.width=6}
+```{r fboxplot, fig.asp=0.8, fig.width=6}
 boxplot.fd(x = final_fd)
 ```
 
+* The black curve is the *functional median*, i.e., the most "typical" curve in the data.
 
+* The middle pink envelope, enclosed by the inner blue lines represents the range of the $50\%$ most typical curves.
 
+* The outer blue lines can be views as analogous to whiskers on a traditional boxplot.
 
-
+* The red curves are outliers, identified by crossing a threshold (obtained by extending the middle envelope by $1.5$ times its width) at any point in the time domain.
 
 ## Derivatives
 
----
+Given a representation of a function $x(t)$, examining the derivatives (i.e., rates of change) of that function with respect to its argument $t$ is often of interest.
+We let $\frac{d^m x(t)}{dt^m}$ represent the $m$th derivative of $x(t)$ with respect to time.
+For example, from observed displacement data, we might wish to calculate estimates of velocity (the first derivative) or acceleration (second derivative).
+
+```{r}
+velocity <- deriv.fd(expr = final_fd, Lfdobj = 1) # 1st derivative
+acceleration <- deriv.fd(expr = final_fd, Lfdobj = 2) # 2nd derivative
+par(mfrow = c(1, 2))
+plot(velocity)
+plot(acceleration)
+```
+
+**Note:** If we were really interested in acceleration estimates, we would use a quintic (order 6, rather than 4) spline to represent displacement so that it's second derivative would be represented by piecewise cubic polynomials.
 
 ---
-
 
 # References
 
