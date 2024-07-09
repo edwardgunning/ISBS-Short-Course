@@ -803,7 +803,7 @@ boxplot.fd(x = final_fd)
   curve in the data.
 
 - The middle pink envelope, enclosed by the inner blue lines represents
-  the range of the $50\%$ most typical curves.
+  the range of the 50% most typical curves.
 
 - The outer blue lines can be views as analogous to whiskers on a
   traditional boxplot.
