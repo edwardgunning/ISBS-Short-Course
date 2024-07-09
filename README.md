@@ -87,14 +87,14 @@ install.packages("refund") # install the refund package
 
 # ⏱️ Schedule
 
-|              Time | Topic                    | Format                |  Lead   | Material |
-|------------------:|:-------------------------|-----------------------|:-------:|:---------|
-| $09.00$ - $09.30$ | Welcome and Introduction | Lecture               |   DH    | [](link) |
-| $09.30$ - $09.50$ | Coffee Break             |                       |         |          |
-| $09.50$ - $12.00$ | Foundations of FDA       | Lecture               | DH & EG | [](link) |
-| $12.00$ - $13.00$ | Lunch                    |                       |         |          |
-| $13.00$ - $15.00$ | Hands-on FDA with **R**  | Practical (groups)    |   EG    | [](link) |
-| $15.15$ - $16.00$ | Q&A with Coffee          | Group Discussion/ Q&A | DH & EG |          |
+|              Time | Topic                    | Format                |  Lead   |
+|------------------:|:-------------------------|-----------------------|:-------:|
+| $09.00$ - $09.30$ | Welcome and Introduction | Lecture               |   DH    |
+| $09.30$ - $09.50$ | Coffee Break             |                       |         |
+| $09.50$ - $12.00$ | Foundations of FDA       | Lecture               | DH & EG |
+| $12.00$ - $13.00$ | Lunch                    |                       |         |
+| $13.00$ - $15.00$ | Hands-on FDA with **R**  | Practical (groups)    |   EG    |
+| $15.00$ - $16.00$ | Q&A with Coffee          | Group Discussion/ Q&A | DH & EG |
 
 ------------------------------------------------------------------------
 
@@ -125,6 +125,15 @@ install.packages("refund") # install the refund package
 
 # 📖 Further Reading
 
+- A deeper account of this material will be provided in our upcoming
+  book [Functional Data Analysis in
+  Biomechanics](https://link.springer.com/book/9783031688614) which will
+  be published by Springer later this year
+
+<center>
+<img src="logo/book-cover.png" width="150">
+</center>
+
 - Crainiceanu, C. M., Goldsmith, J., Leroux, A., & Cui, E. (2024).
   Functional Data Analysis with R (1st edition). Chapman and Hall/CRC
   (book website: <https://functionaldataanalysis.org>)
@@ -148,57 +157,54 @@ R.version # version of R
 ```
 
     ##                _                           
-    ## platform       aarch64-apple-darwin20      
-    ## arch           aarch64                     
-    ## os             darwin20                    
-    ## system         aarch64, darwin20           
+    ## platform       x86_64-apple-darwin17.0     
+    ## arch           x86_64                      
+    ## os             darwin17.0                  
+    ## system         x86_64, darwin17.0          
     ## status                                     
     ## major          4                           
-    ## minor          4.1                         
-    ## year           2024                        
-    ## month          06                          
-    ## day            14                          
-    ## svn rev        86737                       
+    ## minor          1.2                         
+    ## year           2021                        
+    ## month          11                          
+    ## day            01                          
+    ## svn rev        81115                       
     ## language       R                           
-    ## version.string R version 4.4.1 (2024-06-14)
-    ## nickname       Race for Your Life
+    ## version.string R version 4.1.2 (2021-11-01)
+    ## nickname       Bird Hippie
 
 ``` r
 # package versions:
 packageVersion("fda") 
 ```
 
-    ## [1] '6.1.8'
+    ## [1] '5.5.1'
 
 ``` r
 packageVersion("refund")
 ```
 
-    ## [1] '0.1.35'
+    ## [1] '0.1.26'
 
 ``` r
 sessionInfo() # R session info.
 ```
 
-    ## R version 4.4.1 (2024-06-14)
-    ## Platform: aarch64-apple-darwin20
-    ## Running under: macOS Sonoma 14.4
+    ## R version 4.1.2 (2021-11-01)
+    ## Platform: x86_64-apple-darwin17.0 (64-bit)
+    ## Running under: macOS Big Sur 10.16
     ## 
     ## Matrix products: default
-    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib 
-    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
+    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib
+    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
     ## 
     ## locale:
-    ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
-    ## 
-    ## time zone: America/New_York
-    ## tzcode source: internal
+    ## [1] en_IE.UTF-8/en_IE.UTF-8/en_IE.UTF-8/C/en_IE.UTF-8/en_IE.UTF-8
     ## 
     ## attached base packages:
     ## [1] stats     graphics  grDevices utils     datasets  methods   base     
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] compiler_4.4.1    fastmap_1.2.0     cli_3.6.3         tools_4.4.1      
-    ##  [5] htmltools_0.5.8.1 rstudioapi_0.16.0 yaml_2.3.8        rmarkdown_2.27   
-    ##  [9] knitr_1.47        xfun_0.45         digest_0.6.36     mime_0.12        
-    ## [13] rlang_1.1.4       evaluate_0.24.0
+    ##  [1] compiler_4.1.2  fastmap_1.1.0   cli_3.6.1       tools_4.1.2    
+    ##  [5] htmltools_0.5.5 rstudioapi_0.13 yaml_2.3.5      rmarkdown_2.27 
+    ##  [9] knitr_1.47      xfun_0.44       digest_0.6.29   mime_0.12      
+    ## [13] rlang_1.1.1     evaluate_0.15

@@ -90,14 +90,14 @@ install.packages("refund") # install the refund package
 
 # ⏱️ Schedule
 
-| Time | Topic | Format | Lead | Material |
-|-------:|:------|-----------|:---------:|:------|
-| $09.00$ - $09.30$ | Welcome and Introduction | Lecture | DH | [](link) |
-| $09.30$ - $09.50$ | Coffee Break |  |  | |
-| $09.50$ - $12.00$ | Foundations of FDA | Lecture | DH & EG | [](link) |
-| $12.00$ - $13.00$ | Lunch |  |  | |
-| $13.00$ - $15.00$ | Hands-on FDA with **R** | Practical (groups) | EG | [](link) |
-| $15.15$ - $16.00$ | Q&A with Coffee | Group Discussion/ Q&A | DH & EG
+| Time | Topic | Format | Lead |
+|-------:|:------|-----------|:---------:|
+| $09.00$ - $09.30$ | Welcome and Introduction | Lecture | DH | 
+| $09.30$ - $09.50$ | Coffee Break |  |  |
+| $09.50$ - $12.00$ | Foundations of FDA | Lecture | DH & EG |
+| $12.00$ - $13.00$ | Lunch |  |  |
+| $13.00$ - $15.00$ | Hands-on FDA with **R** | Practical (groups) | EG |
+| $15.00$ - $16.00$ | Q&A with Coffee | Group Discussion/ Q&A | DH & EG
 
 ---
 
@@ -125,6 +125,12 @@ install.packages("refund") # install the refund package
 ---
 
 # 📖 Further Reading
+
+* A deeper account of this material will be provided in our upcoming book [Functional Data Analysis in Biomechanics](https://link.springer.com/book/9783031688614) which will be published by Springer later this year 
+
+<center>
+<img src="logo/book-cover.png" width="150">
+</center>
 
 * Crainiceanu, C. M., Goldsmith, J., Leroux, A., & Cui, E. (2024). Functional Data Analysis with R (1st edition). Chapman and Hall/CRC (book website: [https://functionaldataanalysis.org](https://functionaldataanalysis.org))
 
