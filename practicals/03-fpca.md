@@ -1,27 +1,19 @@
 Part 3: Functional Principal Components Analysis
 ================
 
-- <a href="#1-load-packages" id="toc-1-load-packages">1 Load Packages</a>
-- <a href="#2-short-data-description" id="toc-2-short-data-description">2
-  Short Data Description</a>
-- <a href="#3-load-data" id="toc-3-load-data">3 Load Data</a>
-- <a href="#4-data-exploration" id="toc-4-data-exploration">4 Data
-  Exploration</a>
-- <a href="#5-applying-fpca" id="toc-5-applying-fpca">5 Applying FPCA</a>
-- <a href="#6-unpacking-the-pcafd-object"
-  id="toc-6-unpacking-the-pcafd-object">6 Unpacking the
-  <code>pca.fd()</code> object</a>
-- <a href="#7-describing-the-fpca" id="toc-7-describing-the-fpca">7
-  Describing the FPCA</a>
-- <a href="#8-fpcs-as-basis-functions"
-  id="toc-8-fpcs-as-basis-functions">8 FPCs as basis functions</a>
-- <a href="#9-exercise-use-the-scores-in-downstream-analysis"
-  id="toc-9-exercise-use-the-scores-in-downstream-analysis">9
-  <strong>Exercise:</strong> Use the scores in downstream analysis</a>
-- <a href="#10-references" id="toc-10-references">10 References</a>
-- <a href="#11-session-information-reproducibility"
-  id="toc-11-session-information-reproducibility">11 Session Information
-  (Reproducibility)</a>
+- [1 Load Packages](#1-load-packages)
+- [2 Short Data Description](#2-short-data-description)
+- [3 Load Data](#3-load-data)
+- [4 Data Exploration](#4-data-exploration)
+- [5 Applying FPCA](#5-applying-fpca)
+- [6 Unpacking the `pca.fd()` object](#6-unpacking-the-pcafd-object)
+- [7 Describing the FPCA](#7-describing-the-fpca)
+- [8 FPCs as basis functions](#8-fpcs-as-basis-functions)
+- [9 **Exercise:** Use the scores in downstream
+  analysis](#9-exercise-use-the-scores-in-downstream-analysis)
+- [10 References](#10-references)
+- [11 Session Information
+  (Reproducibility)](#11-session-information-reproducibility)
 
 <center>
 
@@ -191,166 +183,14 @@ info_df <- data.frame(`FPC Number` = 1:6,
 kableExtra::kable(info_df) # fancy table markdown output
 ```
 
-<table>
-<thead>
-<tr>
-<th style="text-align:right;">
-
-FPC.Number
-
-</th>
-<th style="text-align:right;">
-
-Eigenvalue
-
-</th>
-<th style="text-align:right;">
-
-Proportion.of.Variance
-
-</th>
-<th style="text-align:right;">
-
-Cumulative.Proportion.of.Variance
-
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:right;">
-
-1
-
-</td>
-<td style="text-align:right;">
-
-0.20
-
-</td>
-<td style="text-align:right;">
-
-0.48
-
-</td>
-<td style="text-align:right;">
-
-0.48
-
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-
-2
-
-</td>
-<td style="text-align:right;">
-
-0.09
-
-</td>
-<td style="text-align:right;">
-
-0.20
-
-</td>
-<td style="text-align:right;">
-
-0.68
-
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-
-3
-
-</td>
-<td style="text-align:right;">
-
-0.04
-
-</td>
-<td style="text-align:right;">
-
-0.10
-
-</td>
-<td style="text-align:right;">
-
-0.78
-
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-
-4
-
-</td>
-<td style="text-align:right;">
-
-0.03
-
-</td>
-<td style="text-align:right;">
-
-0.08
-
-</td>
-<td style="text-align:right;">
-
-0.86
-
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-
-5
-
-</td>
-<td style="text-align:right;">
-
-0.02
-
-</td>
-<td style="text-align:right;">
-
-0.06
-
-</td>
-<td style="text-align:right;">
-
-0.92
-
-</td>
-</tr>
-<tr>
-<td style="text-align:right;">
-
-6
-
-</td>
-<td style="text-align:right;">
-
-0.01
-
-</td>
-<td style="text-align:right;">
-
-0.03
-
-</td>
-<td style="text-align:right;">
-
-0.95
-
-</td>
-</tr>
-</tbody>
-</table>
+| FPC.Number | Eigenvalue | Proportion.of.Variance | Cumulative.Proportion.of.Variance |
+|-----------:|-----------:|-----------------------:|----------------------------------:|
+|          1 |       0.20 |                   0.48 |                              0.48 |
+|          2 |       0.09 |                   0.20 |                              0.68 |
+|          3 |       0.04 |                   0.10 |                              0.78 |
+|          4 |       0.03 |                   0.08 |                              0.86 |
+|          5 |       0.02 |                   0.06 |                              0.92 |
+|          6 |       0.01 |                   0.03 |                              0.95 |
 
 Now, we can plot the FPCs as perturbations of the mean function using
 `plot.pca.fd()`, passing the `pca.fd` object as our argument.
@@ -471,34 +311,36 @@ model.
 sessionInfo()
 ```
 
-    ## R version 4.1.2 (2021-11-01)
-    ## Platform: x86_64-apple-darwin17.0 (64-bit)
-    ## Running under: macOS Big Sur 10.16
+    ## R version 4.4.1 (2024-06-14)
+    ## Platform: aarch64-apple-darwin20
+    ## Running under: macOS Sonoma 14.4
     ## 
     ## Matrix products: default
-    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRblas.0.dylib
-    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.1/Resources/lib/libRlapack.dylib
+    ## BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib 
+    ## LAPACK: /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRlapack.dylib;  LAPACK version 3.12.0
     ## 
     ## locale:
-    ## [1] en_IE.UTF-8/en_IE.UTF-8/en_IE.UTF-8/C/en_IE.UTF-8/en_IE.UTF-8
+    ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+    ## 
+    ## time zone: Europe/Dublin
+    ## tzcode source: internal
     ## 
     ## attached base packages:
     ## [1] splines   stats     graphics  grDevices utils     datasets  methods  
     ## [8] base     
     ## 
     ## other attached packages:
-    ## [1] fda_5.5.1      deSolve_1.30   fds_1.8        RCurl_1.98-1.6 rainbow_3.6   
-    ## [6] pcaPP_1.9-74   MASS_7.3-55    Matrix_1.4-0  
+    ## [1] fda_6.1.8       deSolve_1.40    fds_1.8         RCurl_1.98-1.14
+    ## [5] rainbow_3.8     pcaPP_2.0-4     MASS_7.3-60.2  
     ## 
     ## loaded via a namespace (and not attached):
-    ##  [1] pracma_2.3.8       compiler_4.1.2     highr_0.11         bitops_1.0-7      
-    ##  [5] ks_1.13.4          tools_4.1.2        digest_0.6.29      mclust_5.4.9      
-    ##  [9] viridisLite_0.4.0  lifecycle_1.0.3    evaluate_0.15      lattice_0.20-45   
-    ## [13] rlang_1.1.1        cli_3.6.1          rstudioapi_0.13    yaml_2.3.5        
-    ## [17] mvtnorm_1.1-3      xfun_0.44          fastmap_1.1.0      kableExtra_1.3.4  
-    ## [21] stringr_1.4.0      xml2_1.3.3         httr_1.4.2         cluster_2.1.2     
-    ## [25] knitr_1.47         systemfonts_1.0.4  webshot_0.5.2      grid_4.1.2        
-    ## [29] svglite_2.1.0      glue_1.6.2         hdrcde_3.4         R6_2.5.1          
-    ## [33] rmarkdown_2.27     magrittr_2.0.2     scales_1.2.1       htmltools_0.5.5   
-    ## [37] rvest_1.0.2        colorspace_2.0-3   KernSmooth_2.23-20 stringi_1.7.6     
-    ## [41] munsell_0.5.0
+    ##  [1] Matrix_1.7-0       compiler_4.4.1     highr_0.11         xml2_1.3.6        
+    ##  [5] stringr_1.5.1      ks_1.14.2          bitops_1.0-7       cluster_2.1.6     
+    ##  [9] systemfonts_1.1.0  scales_1.3.0       yaml_2.3.8         fastmap_1.2.0     
+    ## [13] lattice_0.22-6     R6_2.5.1           knitr_1.47         kableExtra_1.4.0  
+    ## [17] munsell_0.5.1      svglite_2.1.3      rlang_1.1.4        hdrcde_3.4        
+    ## [21] stringi_1.8.4      xfun_0.45          viridisLite_0.4.2  cli_3.6.3         
+    ## [25] magrittr_2.0.3     digest_0.6.36      grid_4.4.1         rstudioapi_0.16.0 
+    ## [29] mvtnorm_1.2-5      mclust_6.1.1       lifecycle_1.0.4    KernSmooth_2.23-24
+    ## [33] evaluate_0.24.0    pracma_2.4.4       glue_1.7.0         colorspace_2.1-0  
+    ## [37] rmarkdown_2.27     tools_4.4.1        htmltools_0.5.8.1
