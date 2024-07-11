@@ -66,7 +66,7 @@ up to speed with R are:
 ## R Packages
 
 For this workshop, we will primarily use the `fda` (Ramsay, Graves and
-Hooker, 2021) and `refund` (Goldsmith et al., 2022) packages.
+Hooker, 2024) and `refund` (Goldsmith et al., 2024) packages.
 
 To install these, you should run the following commands:
 
@@ -136,14 +136,14 @@ a start at $9.00$am.
 
 # 📚 References
 
-- J. O. Ramsay, Spencer Graves and Giles Hooker (2021). fda: Functional
-  Data Analysis. R package version 5.5.1.
+- J. O. Ramsay, Spencer Graves and Giles Hooker (2024). fda: Functional
+  Data Analysis. R package version 6.1.8.
   <https://CRAN.R-project.org/package=fda>
 
 - Jeff Goldsmith, Fabian Scheipl, Lei Huang, Julia Wrobel, Chongzhi Di,
   Jonathan Gellar, Jaroslaw Harezlak, Mathew W. McLean, Bruce Swihart,
-  Luo Xiao, Ciprian Crainiceanu and Philip T. Reiss (2022). refund:
-  Regression with Functional Data. R package version 0.1-26.
+  Luo Xiao, Ciprian Crainiceanu and Philip T. Reiss (2024). refund:
+  Regression with Functional Data. R package version 0.1.35.
   <https://CRAN.R-project.org/package=refund>
 
 ------------------------------------------------------------------------
