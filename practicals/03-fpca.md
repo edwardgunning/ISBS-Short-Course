@@ -54,7 +54,7 @@ produced during the same trial.
 # 3 Load Data
 
 You should download for this practical the dataset from [this
-link](https://github.com/edwardgunning/ISBS-Short-Course/blob/main/practicals/reg-data.rds)
+link](https://github.com/edwardgunning/ISBS-Short-Course/blob/main/practicals/fpca-data.rds)
 and place it in your working directory. Then we load it and unpack the
 objects as follows.
 

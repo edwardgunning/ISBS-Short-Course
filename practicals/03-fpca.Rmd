@@ -33,7 +33,7 @@ We also have a scalar variable, the **maximum anterior-posterior** force produce
 
 # Load Data
 
-You should download for this practical the dataset from [this link](https://github.com/edwardgunning/ISBS-Short-Course/blob/main/practicals/reg-data.rds) and place it in your working directory. Then we load it and unpack the objects as follows.
+You should download for this practical the dataset from [this link](https://github.com/edwardgunning/ISBS-Short-Course/blob/main/practicals/fpca-data.rds) and place it in your working directory. Then we load it and unpack the objects as follows.
 
 ```{r}
 fpca_data <- readRDS(file = "fpca-data.rds")
