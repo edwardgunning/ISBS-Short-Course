@@ -100,6 +100,12 @@ install.packages("refund") # install the refund package
 
 ------------------------------------------------------------------------
 
+# 🏢 Location
+
+The workshop will take place in Grüner Hörsaal.
+
+------------------------------------------------------------------------
+
 # ⏱️ Schedule
 
 |              Time | Topic                    | Format                |  Lead   |
