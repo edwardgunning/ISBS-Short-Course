@@ -86,8 +86,67 @@ Not surprisingly, the function $\widehat{\beta}_1(t)$ is largest (and positive) 
 
 ## Fitting with `fRegress()`
 
-We can also do this with the `fRegress()` function from the `fda` package. We will not aim to go through it today, but essentially it involves an ordinary cross-validation step to choose the smoothing paraneter, as well as a adhering to a slightly strange requirement of setting the scalar parameter $\beta_0$ up as a constant function. We do not provide the code here but it can be found [at this link](https://github.com/FAST-ULxNUIG/SpringerBriefs/blob/main/chapter-06/Case-Study-Part-02-MD.md#fregress).
+We can also do this with the `fRegress()` function from the `fda` package. We will not aim to go through it today, but essentially it involves an ordinary cross-validation step to choose the smoothing parameter, as well as a adhering to a slightly strange requirement of setting the scalar parameter $\beta_0$ up as a constant function. We do not provide the code here but it can be found [at this link](https://github.com/FAST-ULxNUIG/SpringerBriefs/blob/main/chapter-06/Case-Study-Part-02-MD.md#fregress).
 
+# **Part (b)**: Function-on-scalar Regression (Functional ANOVA)
+
+Again, our data come from the GaitRec dataset (Horsak et al., 2020). This time we are looking at Anterior-Posterior GRF curves, coming from healthy controls and individuals with impairments in the hip, knee ankle and calcaneous. We formulate a function-on-scalar regression model, to assess the effect of impairment on the Anterior-Posterior GRF (or more specifically, compare average Anterior-Posterior GRF curves between the helathy controls and the different impairment groups).
+
+
+## Load Data
+
+You should download for this practical the dataset from [this link](https://github.com/edwardgunning/ISBS-Short-Course/blob/main/practicals/fosr-data.rds) and place it in your working directory. Then we load it and unpack the objects as follows.
+
+* `ap_fd` is a functional data object containing our AP force curves, and
+
+* `class_label` is a vector containing the corresponding class labels (e.g., healthy controls, hip impairment etc.)
+
+```{r}
+fosr_data <- readRDS(file = "fosr-data.rds")
+ap_fd <- fosr_data$ap_fd # ap functional data object
+class_label <- fosr_data$class_label # class labels (e.g., "healthy control")
+table(class_label)
+```
+
+## Function-on-scalar model
+
+We formulate the model
+$$
+y^{AP}_i(t) = \beta_0 (t) + \sum_{p=1}^5 x_{ip} \beta_p (t) + \epsilon_i (t),
+$$
+where:
+
+* $y^{AP}_i(t)$ is the anterior-posterior force function for the $i$th individual
+
+* $\beta_0(t)$ is the intercept function,
+
+* $x_{i1}, \dots, x_{i5}$ are dummy-coded scalar covariates that represent membership of the healthy control and ankle, knee, hip and calcaneus impairment groups
+
+* $\beta_1(t), \dots, \beta_5 (t)$ are the corresponding regression coefficient functions for scalar covariates $x_{i1}, \dots, x_{i5}$. We enforce the constraint $\sum_{p=1}^5\beta_p(t)=0$ for all $t$, so that $\beta_p(t)$ represents the deviation of the $p$th group from the overall mean function, and
+
+* $\epsilon_i(t)$ is the smooth functional random error term
+
+## Fitting with `fosr()`
+
+This model can be fit very easily using the `fosr()` function from the `refund` package.
+
+We simply need to set up a design matrix `modmat` containing the dummy variables in its columns and passing it as the `X` argument, and a vector called `constraints` that says which columns of this matrix should sum to zero and passing it as the `con` argument.
+
+
+
+```{r}
+modmat <- cbind(Intercept = 1, model.matrix(~ factor(class_label) - 1))
+(constraints = matrix(c(0, 1, 1, 1, 1, 1), 1)) # vector says all betas sum to zero
+colnames(modmat)[-1] <- stringr::str_remove(colnames(modmat)[-1],
+                                            pattern =  "factor\\(class_label\\)")
+fosr <- fosr(fdobj = ap_fd,
+             X = modmat, # design matrix
+             con = constraints, # sum-to-zero constraints
+             method = "GLS", # (Reiss et al., 2010)  
+             argvals = 0:100)
+
+plot(fosr, titles = colnames(modmat))
+```
 
 
 # References

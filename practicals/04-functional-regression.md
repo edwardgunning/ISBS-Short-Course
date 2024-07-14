@@ -5,6 +5,9 @@ Part 4: Functional Regression
 - <a href="#part-a-scalar-on-function-regression"
   id="toc-part-a-scalar-on-function-regression"><strong>Part (a)</strong>:
   Scalar-on-function Regression</a>
+- <a href="#part-b-function-on-scalar-regression-functional-anova"
+  id="toc-part-b-function-on-scalar-regression-functional-anova"><strong>Part
+  (b)</strong>: Function-on-scalar Regression (Functional ANOVA)</a>
 - <a href="#references" id="toc-references">References</a>
 - <a href="#session-information-reproducibility"
   id="toc-session-information-reproducibility">Session Information
@@ -164,10 +167,99 @@ with producing a larger AP force at this same instant.
 We can also do this with the `fRegress()` function from the `fda`
 package. We will not aim to go through it today, but essentially it
 involves an ordinary cross-validation step to choose the smoothing
-paraneter, as well as a adhering to a slightly strange requirement of
+parameter, as well as a adhering to a slightly strange requirement of
 setting the scalar parameter $\beta_0$ up as a constant function. We do
 not provide the code here but it can be found [at this
 link](https://github.com/FAST-ULxNUIG/SpringerBriefs/blob/main/chapter-06/Case-Study-Part-02-MD.md#fregress).
+
+# **Part (b)**: Function-on-scalar Regression (Functional ANOVA)
+
+Again, our data come from the GaitRec dataset (Horsak et al., 2020).
+This time we are looking at Anterior-Posterior GRF curves, coming from
+healthy controls and individuals with impairments in the hip, knee ankle
+and calcaneous. We formulate a function-on-scalar regression model, to
+assess the effect of impairment on the Anterior-Posterior GRF (or more
+specifically, compare average Anterior-Posterior GRF curves between the
+helathy controls and the different impairment groups).
+
+## Load Data
+
+You should download for this practical the dataset from [this
+link](https://github.com/edwardgunning/ISBS-Short-Course/blob/main/practicals/fosr-data.rds)
+and place it in your working directory. Then we load it and unpack the
+objects as follows.
+
+- `ap_fd` is a functional data object containing our AP force curves,
+  and
+
+- `class_label` is a vector containing the corresponding class labels
+  (e.g., healthy controls, hip impairment etc.)
+
+``` r
+fosr_data <- readRDS(file = "fosr-data.rds")
+ap_fd <- fosr_data$ap_fd # ap functional data object
+class_label <- fosr_data$class_label # class labels (e.g., "healthy control")
+table(class_label)
+```
+
+    ## class_label
+    ## Healthy Control           Ankle            Knee             Hip      Calcaneous 
+    ##             145             145             145             145             145
+
+## Function-on-scalar model
+
+We formulate the model $$
+y^{AP}_i(t) = \beta_0 (t) + \sum_{p=1}^5 x_{ip} \beta_p (t) + \epsilon_i (t),
+$$ where:
+
+- $y^{AP}_i(t)$ is the anterior-posterior force function for the $i$th
+  individual
+
+- $\beta_0(t)$ is the intercept function,
+
+- $x_{i1}, \dots, x_{i5}$ are dummy-coded scalar covariates that
+  represent membership of the healthy control and ankle, knee, hip and
+  calcaneus impairment groups
+
+- $\beta_1(t), \dots, \beta_5 (t)$ are the corresponding regression
+  coefficient functions for scalar covariates $x_{i1}, \dots, x_{i5}$.
+  We enforce the constraint $\sum_{p=1}^5\beta_p(t)=0$ for all $t$, so
+  that $\beta_p(t)$ represents the deviation of the $p$th group from the
+  overall mean function, and
+
+- $\epsilon_i(t)$ is the smooth functional random error term
+
+## Fitting with `fosr()`
+
+This model can be fit very easily using the `fosr()` function from the
+`refund` package.
+
+We simply need to set up a design matrix `modmat` containing the dummy
+variables in its columns and passing it as the `X` argument, and a
+vector called `constraints` that says which columns of this matrix
+should sum to zero and passing it as the `con` argument.
+
+``` r
+modmat <- cbind(Intercept = 1, model.matrix(~ factor(class_label) - 1))
+(constraints = matrix(c(0, 1, 1, 1, 1, 1), 1)) # vector says all betas sum to zero
+```
+
+    ##      [,1] [,2] [,3] [,4] [,5] [,6]
+    ## [1,]    0    1    1    1    1    1
+
+``` r
+colnames(modmat)[-1] <- stringr::str_remove(colnames(modmat)[-1],
+                                            pattern =  "factor\\(class_label\\)")
+fosr <- fosr(fdobj = ap_fd,
+             X = modmat, # design matrix
+             con = constraints, # sum-to-zero constraints
+             method = "GLS", # (Reiss et al., 2010)  
+             argvals = 0:100)
+
+plot(fosr, titles = colnames(modmat))
+```
+
+<img src="04-functional-regression_files/figure-gfm/unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
 
 # References
 
@@ -210,13 +302,14 @@ sessionInfo()
     ##  [5] colorspace_2.0-3   vctrs_0.6.2        generics_0.1.2     gamm4_0.2-6       
     ##  [9] htmltools_0.5.5    mgcv_1.8-42        yaml_2.3.5         utf8_1.2.2        
     ## [13] rlang_1.1.1        pracma_2.3.8       nloptr_2.0.0       pillar_1.9.0      
-    ## [17] hdrcde_3.4         glue_1.6.2         lifecycle_1.0.3    munsell_0.5.0     
-    ## [21] gtable_0.3.0       mvtnorm_1.1-3      evaluate_0.15      magic_1.6-0       
-    ## [25] knitr_1.47         fastmap_1.1.0      RLRsim_3.1-6       parallel_4.1.2    
-    ## [29] fansi_1.0.2        highr_0.11         Rcpp_1.0.10        pbs_1.1           
-    ## [33] KernSmooth_2.23-20 scales_1.2.1       abind_1.4-5        lme4_1.1-30       
-    ## [37] grpreg_3.4.0       ggplot2_3.4.2      digest_0.6.29      dplyr_1.1.2       
-    ## [41] grid_4.1.2         cli_3.6.1          tools_4.1.2        bitops_1.0-7      
-    ## [45] magrittr_2.0.2     tibble_3.2.1       cluster_2.1.2      pkgconfig_2.0.3   
-    ## [49] minqa_1.2.4        rmarkdown_2.27     rstudioapi_0.13    R6_2.5.1          
-    ## [53] mclust_5.4.9       boot_1.3-28        nlme_3.1-155       compiler_4.1.2
+    ## [17] hdrcde_3.4         glue_1.6.2         lifecycle_1.0.3    stringr_1.4.0     
+    ## [21] munsell_0.5.0      gtable_0.3.0       mvtnorm_1.1-3      evaluate_0.15     
+    ## [25] magic_1.6-0        knitr_1.47         fastmap_1.1.0      RLRsim_3.1-6      
+    ## [29] parallel_4.1.2     fansi_1.0.2        highr_0.11         Rcpp_1.0.10       
+    ## [33] pbs_1.1            KernSmooth_2.23-20 scales_1.2.1       abind_1.4-5       
+    ## [37] lme4_1.1-30        grpreg_3.4.0       ggplot2_3.4.2      digest_0.6.29     
+    ## [41] stringi_1.7.6      dplyr_1.1.2        grid_4.1.2         cli_3.6.1         
+    ## [45] tools_4.1.2        bitops_1.0-7       magrittr_2.0.2     tibble_3.2.1      
+    ## [49] cluster_2.1.2      pkgconfig_2.0.3    minqa_1.2.4        rmarkdown_2.27    
+    ## [53] rstudioapi_0.13    R6_2.5.1           mclust_5.4.9       boot_1.3-28       
+    ## [57] nlme_3.1-155       compiler_4.1.2
