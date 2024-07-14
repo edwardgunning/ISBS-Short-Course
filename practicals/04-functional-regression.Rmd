@@ -163,11 +163,30 @@ fosr <- fosr(fdobj = ap_fd,
 plot(fosr, titles = colnames(modmat))
 ```
 
-To perform a singificance test of the form:
+Now, we can perform a **simultaneous** significance test of the form:
 
 * $H_0$: $\beta_1(t) = \beta_2(t) = \dots =\beta_5(t) = 0$ for all $t \in [0,100]$ (i.e., group mean curves are all equal)
 
-* $H_A$: There exists some $t\in[0,T]$ such that at least one of $\beta_1(t),\dots, \beta_5(t)$ is different.
+* $H_A$: There exists some $t\in[0,T]$ such that at least one of $\beta_1(t),\dots, \beta_5(t)$ is different (i.e., the group mean curves are nit all equal).
+
+If we had scalar data, rather than curves, we would calculate a classical F-statistic. However, since we have functional data, we have an F-statistic function $F(t)$, i.e., a classical F-statistic calculated at each $t$. Obviously, performing a test at each $t$, would lead to an inflated type I error rate.
+
+An appropriate test statistic to test the above hypothesis is $F_{max}=\max_{t\in[0,T]}F(t)$. We don't have an analytical expression for its distribution under the null hypothesis, i.e., we can't readily compare our observed $F_{max}$ to a critical value. Therefore, we approximate the distribution of $F_{max}$ under $H_0$ by _**permutation**_. That is, we randomly shuffle the group labels and re-calculate the test statistic many times. Then we compare our observed test statistic to this distribution.
+
+The `fosr.perm()` function performs the permutation test for us. **Note**: We don't evaluate this chunk for computational reasons.
+
+```{r, eval = FALSE}
+fosr.perm(fdobj = ap_fd,
+          X = modmat, # design matrix
+          con = constraints, # sum-to-zero constraints
+          method = "GLS", # (Reiss et al., 2010)  
+          argvals = 0:100, 
+          nperm = 400)
+```
+
+## Other Fitting Approaches
+
+A full demo of this function-on-scalar regression model using various other software implementations is available [at this link](https://github.com/FAST-ULxNUIG/SpringerBriefs/blob/main/chapter-06/Case-Study-Part-03-MD.md#function-on-scalar-regression).
 
 # References
 
