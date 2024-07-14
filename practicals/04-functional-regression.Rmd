@@ -1,6 +1,10 @@
 ---
 title: "Part 4: Functional Regression"
-output: github_document
+output: 
+  github_document:
+    number_sections: false
+    toc: true
+    toc_depth: 1
 ---
 
 ```{r setup, include=FALSE}
@@ -15,8 +19,85 @@ knitr::opts_chunk$set(echo = TRUE, fig.align = 'center')
 
 # Load Packages
 
-For this section, we just need the `fda` package.
+For this practical, we need the `fda` package and the `refund` ("regression with functional data") package.
 
 ```{r, warning = FALSE, message = FALSE}
 library(fda) # load the fda package
+library(refund) # load the refund package
+```
+
+
+# **Part (a)**: Scalar-on-function Regression
+
+## Short Data Description
+
+For part 1, we'll use the same sample of data as practical 3, which come from the GaitRec dataset (Horsak et al., 2020). 
+
+These functional data represent the vertical ground reaction force measured during walking using force plates for a group of **Healthy controls**. They are defined on the normalised time domain $[0. 100]$ where $0$ represents the start of the stance phase when the foot touches the force plate and $100$ represents the end. The force is normalised to body weight.
+
+We also have a scalar variable, the **maximum anterior-posterior** force produced during the same trial.
+
+## Load Data
+
+You should download for this practical the dataset from [this link](https://github.com/edwardgunning/ISBS-Short-Course/blob/main/practicals/fpca-data.rds) and place it in your working directory. Then we load it and unpack the objects as follows.
+
+```{r}
+fpca_data <- readRDS(file = "fpca-data.rds")
+grf_fd <- fpca_data$grf_fd # grf functional data object
+max_ap <- fpca_data$max_ap # scalar max ap variable
+t_grid <- 0:100 # grid of points we'll use to evaluate
+```
+
+In the last practical, we applied FPCA to the Vertical GRF curves, and used the FPC scores to predict maximum AP force. 
+Let's recap on the code for this.
+
+```{r}
+grf_pca.fd <- pca.fd(fdobj = grf_fd, nharm = 6)
+grf_fpc_scores <- grf_pca.fd$scores
+fpcr_df <- data.frame(grf_fpc_scores, max_ap)
+names(fpcr_df)[1:6] <- paste0("fpc_", 1:6)
+fpcr_lm <- lm(formula = max_ap ~ fpc_1 + fpc_2 + fpc_3 + fpc_4 + fpc_5 + fpc_6, 
+   data = fpcr_df)
+summary(fpcr_lm)
+```
+
+This is a useful approach, but me way also prefer a model where we have more flexibility in representing how the Vertical GRF curves affect the maximum AP force. Thus, we posit the scalar-on-function linear regression model
+$$y_i^{AP} = \beta_0 + \int_0^{100} x_i^{V}(t) \beta_1(t) \mathrm{d}t.$$
+Here, $\beta_1(t)$ is a smooth weight function that weights parts of the Vertical GRF curves $x_i^{V}(t)$ to predict the maximum AP force $y_i^{AP}$. Our goal is to estimate the function $\beta_1(t)$.
+
+## Fitting with `pfr()`
+
+Fitting this model with `pfr()` from the refund package is **really** simple. We need to feed in the functional predictor evaluated on a grid (note: manual says that we can supply `fd` object). For now, we just evaluate at $0,1,2\dots,100$:
+
+ * `lf()` specifies a linear functional predictor of the form $\int x(t) \beta(t) \mathrm{d}t$.
+
+ * Use `bs = "bs"` for a "B-spline basis with integrated squared derivative penalties" (see `?mgcv::smooth.terms` for details).
+
+```{r}
+grf_fd_eval <- t(eval.fd(evalarg = 0:100, fdobj = grf_fd))
+pfr_fit <- pfr(max_ap ~ lf(X = grf_fd_eval, bs = "bs", k = 35, argvals = 0:100))
+summary(pfr_fit)
+plot(pfr_fit, xlab = "t", ylab = expression(beta(t)))
+abline(h =0, lty = 3)
+```
+
+Not surprisingly, the function $\widehat{\beta}_1(t)$ is largest (and positive) at about $t=80%$, which is also approximately the time point where the maximum AP force occurs in the stance phase. In other words, producing a larger vertical force at this point is positively associated with producing a larger AP force at this same instant.
+
+
+## Fitting with `fRegress()`
+
+We can also do this with the `fRegress()` function from the `fda` package. We will not aim to go through it today, but essentially it involves an ordinary cross-validation step to choose the smoothing paraneter, as well as a adhering to a slightly strange requirement of setting the scalar parameter $\beta_0$ up as a constant function. We do not provide the code here but it can be found [at this link](https://github.com/FAST-ULxNUIG/SpringerBriefs/blob/main/chapter-06/Case-Study-Part-02-MD.md#fregress).
+
+
+
+# References
+
+* Horsak, B., Slijepcevic, D., Raberger, A.-M., Schwab, C., Worisch, M., & Zeppelzauer, M. (2020). GaitRec, a large-scale ground reaction force dataset of healthy and impaired gait. Scientific Data, 7(1), Article 1. https://doi.org/10.1038/s41597-020-0481-z
+
+* Publicly Available Data-Sharing Repository for Full GaitRec Dataset: https://doi.org:10.6084/m9.figshare.c.4788012.v1
+
+# Session Information (Reproducibility)
+
+```{r}
+sessionInfo()
 ```
