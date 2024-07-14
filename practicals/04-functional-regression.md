@@ -206,11 +206,57 @@ table(class_label)
     ## Healthy Control           Ankle            Knee             Hip      Calcaneous 
     ##             145             145             145             145             145
 
+## Exploratory Data Analysis
+
+Let’s plot out the curves by group.
+
+``` r
+ylims <- range(eval.fd(evalarg = 0:100, ap_fd)) # to fix common y axis lets get range of full dataset
+par(mfrow = c(2, 3))
+plot(ap_fd[class_label=="Healthy Control",], ylim = ylims)
+```
+
+    ## [1] "done"
+
+``` r
+title("Healthy Control")
+plot(ap_fd[class_label=="Ankle",], ylim = ylims)
+```
+
+    ## [1] "done"
+
+``` r
+title("Ankle")
+plot(ap_fd[class_label=="Hip",], ylim = ylims)
+```
+
+    ## [1] "done"
+
+``` r
+title("Hip")
+plot(ap_fd[class_label=="Knee",], ylim = ylims)
+```
+
+    ## [1] "done"
+
+``` r
+title("Knee")
+plot(ap_fd[class_label=="Calcaneous",], ylim = ylims)
+```
+
+    ## [1] "done"
+
+``` r
+title("Calcaneous")
+```
+
+<img src="04-functional-regression_files/figure-gfm/unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+
 ## Function-on-scalar model
 
-We formulate the model $$
-y^{AP}_i(t) = \beta_0 (t) + \sum_{p=1}^5 x_{ip} \beta_p (t) + \epsilon_i (t),
-$$ where:
+We formulate the model
+$$y^{AP}_i(t) = \beta_0 (t) + \sum_{p=1}^5 x_{ip} \beta_p (t) + \epsilon_i (t),$$
+where:
 
 - $y^{AP}_i(t)$ is the anterior-posterior force function for the $i$th
   individual
@@ -235,9 +281,9 @@ This model can be fit very easily using the `fosr()` function from the
 `refund` package.
 
 We simply need to set up a design matrix `modmat` containing the dummy
-variables in its columns and passing it as the `X` argument, and a
-vector called `constraints` that says which columns of this matrix
-should sum to zero and passing it as the `con` argument.
+variables in its columns and pass it as the `X` argument, and a vector
+called `constraints` that says which columns of this matrix should sum
+to zero and pass it as the `con` argument.
 
 ``` r
 modmat <- cbind(Intercept = 1, model.matrix(~ factor(class_label) - 1))
@@ -259,7 +305,15 @@ fosr <- fosr(fdobj = ap_fd,
 plot(fosr, titles = colnames(modmat))
 ```
 
-<img src="04-functional-regression_files/figure-gfm/unnamed-chunk-6-1.png" style="display: block; margin: auto;" />
+<img src="04-functional-regression_files/figure-gfm/unnamed-chunk-7-1.png" style="display: block; margin: auto;" />
+
+To perform a singificance test of the form:
+
+- $H_0$: $\beta_1(t) = \beta_2(t) = \dots =\beta_5(t) = 0$ for all
+  $t \in [0,100]$ (i.e., group mean curves are all equal)
+
+- $H_A$: There exists some $t\in[0,T]$ such that at least one of
+  $\beta_1(t),\dots, \beta_5(t)$ is different.
 
 # References
 
