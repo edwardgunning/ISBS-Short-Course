@@ -84,13 +84,16 @@ install.packages("refund") # install the refund package
     * [Part 1 -- Data representation and smoothing](slides/02-smoothing.pptx)
     * [Part 2 -- Registration](slides/03-registration.pptx)
     * [Part 3 -- Functional Principal Components Analysis (FPCA)](slides/04-fpca.pptx)
-    * [Part 4 -- Functional regression (in progress)](slides/05-fregression.pptx)
+    * [Part 4 -- Functional regression](slides/05-fregression.pptx)
 
 * **Practical Material**:
   * [Part 1 -- Data representation and smoothing](practicals/01-smoothing.md)
   * [Part 2 -- Registration](practicals/02-registration.md)
   * [Part 3 -- Functional Principal Components Analysis (FPCA)](practicals/03-fpca.md)
   * [Part 4 -- Functional regression (in progress)](practicals/04-functional-regression.md)
+
+* **Discussion/ Q&A**:
+  * [List of potential discussion topics](slides/discussion-q-and-a.pptx)
 
 ---
 
@@ -102,7 +105,7 @@ The workshop will take place in Grüner Hörsaal.
 
 # ⏱️ Schedule
 
-We will meet at the venue from the official start time of $8.30$am, for a start at $9.00$am.
+We will meet at the venue from the official start time of 8.30am, for a start at 9.00am.
 
 | Time | Topic | Format | Lead |
 |-------:|:------|-----------|:---------:|
