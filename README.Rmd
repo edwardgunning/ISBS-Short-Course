@@ -90,7 +90,7 @@ install.packages("refund") # install the refund package
   * [Part 1 -- Data representation and smoothing](practicals/01-smoothing.md)
   * [Part 2 -- Registration](practicals/02-registration.md)
   * [Part 3 -- Functional Principal Components Analysis (FPCA)](practicals/03-fpca.md)
-  * [Part 4 -- Functional regression (in progress)](practicals/04-functional-regression.md)
+  * [Part 4 -- Functional regression](practicals/04-functional-regression.md)
 
 * **Discussion/ Q&A**:
   * [List of potential discussion topics](slides/discussion-q-and-a.pptx)
