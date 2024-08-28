@@ -14,6 +14,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 </center>
 
+![We thank the all of the organisers and participants who made our pre-conference workshop an amazing experience.](logo/isbs-course.png)
+
 
 ```{r, echo=FALSE, include = FALSE}
 htmltools::img(src = knitr::image_uri("logo/isbs-logo.png"), 

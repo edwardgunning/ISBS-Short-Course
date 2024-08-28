@@ -8,6 +8,14 @@ Functional Data Analysis in Sports Biomechanics
 
 </center>
 
+<figure>
+<img src="logo/isbs-course.png"
+alt="We thank the all of the organisers and participants who made our pre-conference workshop an amazing experience." />
+<figcaption aria-hidden="true">We thank the all of the organisers and
+participants who made our pre-conference workshop an amazing
+experience.</figcaption>
+</figure>
+
 ------------------------------------------------------------------------
 
 # Welcome
@@ -218,7 +226,7 @@ sessionInfo() # R session info.
 
     ## R version 4.4.1 (2024-06-14)
     ## Platform: aarch64-apple-darwin20
-    ## Running under: macOS Sonoma 14.4
+    ## Running under: macOS Sonoma 14.5
     ## 
     ## Matrix products: default
     ## BLAS:   /Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/lib/libRblas.0.dylib 
@@ -227,7 +235,7 @@ sessionInfo() # R session info.
     ## locale:
     ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
     ## 
-    ## time zone: Europe/Vienna
+    ## time zone: Europe/Dublin
     ## tzcode source: internal
     ## 
     ## attached base packages:
