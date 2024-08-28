@@ -10,10 +10,10 @@ Functional Data Analysis in Sports Biomechanics
 
 <figure>
 <img src="logo/isbs-course.png"
-alt="We thank the all of the organisers and participants who made our pre-conference workshop an amazing experience." />
-<figcaption aria-hidden="true">We thank the all of the organisers and
-participants who made our pre-conference workshop an amazing
-experience.</figcaption>
+alt="We thank all of the conference organisers and participants who made our pre-conference workshop an overwhelming success and an amazing experience." />
+<figcaption aria-hidden="true">We thank all of the conference organisers
+and participants who made our pre-conference workshop an overwhelming
+success and an amazing experience.</figcaption>
 </figure>
 
 ------------------------------------------------------------------------
